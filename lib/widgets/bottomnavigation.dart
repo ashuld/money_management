@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:money_management/db/functions/colourfunctions/color.dart';
-import 'package:money_management/screens/home.dart';
-import 'package:money_management/screens/report.dart';
+import 'package:money_management/db/functions/color.dart';
+import 'package:money_management/screens/home/home.dart';
+import 'package:money_management/screens/statistics/report.dart';
 import 'package:money_management/widgets/bottomsheet.dart';
 
 class BottomNavigation extends StatefulWidget {
@@ -33,7 +33,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
       color: secColor,
       ),
       ),
-
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),

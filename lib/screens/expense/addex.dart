@@ -1,33 +1,37 @@
-import 'package:flutter/material.dart';
-import 'package:money_management/widgets/addinbackground.dart';
+// ignore_for_file: avoid_unnecessary_containers
 
-class ScreenAddIncome extends StatefulWidget {
-  const ScreenAddIncome({super.key});
+import 'package:flutter/material.dart';
+import 'package:money_management/screens/expense/widgets/addexbackground.dart';
+
+class ScreenAddExpense extends StatefulWidget {
+  const ScreenAddExpense({super.key});
 
   @override
-  State<ScreenAddIncome> createState() => _ScreenAddIncomeState();
+  State<ScreenAddExpense> createState() => _ScreenAddExpenseState();
 }
 
-class _ScreenAddIncomeState extends State<ScreenAddIncome> {
+class _ScreenAddExpenseState extends State<ScreenAddExpense> {
   DateTime date = DateTime.now();
   String? selectedItem;
-  final TextEditingController income = TextEditingController();
+  final TextEditingController expense = TextEditingController();
   final TextEditingController note = TextEditingController();
   final TextEditingController amount = TextEditingController();
-  FocusNode inc =FocusNode();
+  FocusNode ex =FocusNode();
   FocusNode amount_ =FocusNode();
-  FocusNode ex = FocusNode();
+  FocusNode name = FocusNode();
   List<String> item= [
-    'Salary',
-    'Other Income',
+    'Food',
+    'Entertainment',
+    'Education',
+    'Transportation'
   ];
   @override
   void initState() {
     super.initState();
-    inc.addListener(() {
+    ex.addListener(() {
       setState(() {});
      });
-     ex.addListener(() {
+     name.addListener(() {
       setState(() {});
      });
      amount_.addListener(() {
@@ -42,7 +46,7 @@ class _ScreenAddIncomeState extends State<ScreenAddIncome> {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            AddInBackground(context),
+            AddExBackground(context),
             Positioned(
               top: 120,
               child: Container(
@@ -77,23 +81,25 @@ class _ScreenAddIncomeState extends State<ScreenAddIncome> {
                           value: selectedItem,
                           items: item.map((e) => DropdownMenuItem(
                             value: e,
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 40,
-                                  child: Image.asset('assets/icons/icons8-atm-card-96.png'),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  e,
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                    color: Color.fromARGB(255, 51, 60, 141)
+                            child: Container(
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: 40,
+                                    child: Image.asset('assets/icons/icons8-atm-card-96.png'),
                                   ),
-                                )
-                              ],
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    e,
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      color: Color.fromARGB(255, 51, 60, 141)
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                             )).toList(), 
                             selectedItemBuilder: (context) => item
@@ -138,14 +144,14 @@ class _ScreenAddIncomeState extends State<ScreenAddIncome> {
                         horizontal: 15
                       ),
                       child: TextField(
-                        focusNode: inc,
-                        controller: income,
+                        focusNode: name,
+                        controller: expense,
                         decoration:  InputDecoration(
                           contentPadding: const EdgeInsets.symmetric(
                             horizontal: 15,
                             vertical: 15
                           ),
-                          labelText: 'Income',
+                          labelText: 'Expense',
                           labelStyle: const TextStyle(
                             fontSize: 17,
                             color: Colors.grey,

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:money_management/screens/addcategory.dart';
-import 'package:money_management/screens/addex.dart';
-import 'package:money_management/screens/addin.dart';
-import 'package:money_management/screens/all.dart';
-import 'package:money_management/screens/create.dart';
-import 'package:money_management/screens/report.dart';
-import 'package:money_management/screens/splash.dart';
+import 'package:money_management/screens/about/about.dart';
+import 'package:money_management/screens/category/addcategory.dart';
+import 'package:money_management/screens/expense/addex.dart';
+import 'package:money_management/screens/income/addin.dart';
+import 'package:money_management/screens/privacy/privacy.dart';
+import 'package:money_management/screens/terms/terms.dart';
+import 'package:money_management/screens/transactions/all.dart';
+import 'package:money_management/screens/register/create.dart';
+import 'package:money_management/screens/statistics/report.dart';
+import 'package:money_management/screens/splash/splash.dart';
 import 'package:money_management/widgets/bottomnavigation.dart';
 
 void main() {
@@ -26,9 +29,12 @@ class MyApp extends StatelessWidget {
       home: //ScreenTransactions() 
       //ScreenAddIncome() 
       //ScreenCreateAccount() 
-      BottomNavigation() 
+      //BottomNavigation() 
+      //ScreenAbout()
+      //ScreenTerms()
+      //ScreenPrivacy()
       //const ScreenReport()  
-      //const ScreenSplash(),
+      const ScreenSplash(),
       //ScreenAddCategory()
       //const ScreenAddCategory()
     );

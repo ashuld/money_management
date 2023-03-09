@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:money_management/widgets/addcabackground.dart';
+import 'package:money_management/screens/category/widgets/addcabackground.dart';
 
 class ScreenAddCategory extends StatefulWidget {
   const ScreenAddCategory({super.key});

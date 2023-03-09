@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:money_management/screens/home.dart';
-import 'package:money_management/widgets/bottomnavigation.dart';
+import 'package:money_management/db/functions/color.dart';
 
 Column settingsBackground(BuildContext context){
   return Column(
@@ -9,7 +8,7 @@ Column settingsBackground(BuildContext context){
                 width: double.infinity,
                 height: 240,
                 decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 51, 60, 141),
+                  color: prColor,
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(20),
                     bottomRight: Radius.circular(20)
@@ -32,20 +31,20 @@ Column settingsBackground(BuildContext context){
                             onTap: () {
                               Navigator.of(context).pop();
                             },
-                            child: Icon(Icons.arrow_back,
-                                color: Colors.indigo[50],
+                            child: const Icon(Icons.arrow_back,
+                                color: secColor,
                                 ),
                           ),
-                            Text(
+                            const Text(
                               'Settings',
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,
-                                color: Colors.indigo[50]
+                                color: secColor
                               ),
                               ),
-                              Icon(Icons.settings,
-                              color: Colors.indigo[50],
+                              const Icon(Icons.settings,
+                              color: secColor,
                               )
                         ],
                       ),

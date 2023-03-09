@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:money_management/db/functions/colourfunctions/color.dart';
+import 'package:money_management/db/functions/color.dart';
 import 'package:money_management/db/model/listdata.dart';
-import 'package:money_management/widgets/allhead.dart';
+import 'package:money_management/screens/transactions/widgets/allhead.dart';
 
 class ScreenTransactions extends StatefulWidget {
   const ScreenTransactions({super.key});
@@ -11,8 +11,6 @@ class ScreenTransactions extends StatefulWidget {
 }
 
 class _ScreenTransactionsState extends State<ScreenTransactions> {
-  List day =['Day','Week','Month','Year'];
-  int indexColor = 0 ;
     @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,15 +62,6 @@ class _ScreenTransactionsState extends State<ScreenTransactions> {
                       ],
                     ),
                   ),
-            ),
-            SliverToBoxAdapter(
-              child: Column(
-                children: const [
-                  SizedBox(
-                    height: 30,
-                  )
-                ],
-              ),
             ),
             SliverToBoxAdapter(
               child: Padding(

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:money_management/db/functions/color.dart';
 import 'package:money_management/widgets/bottomnavigation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../widgets/createbackground.dart';
+import 'widgets/createbackground.dart';
 
 class ScreenCreateAccount extends StatefulWidget {
   const ScreenCreateAccount({super.key});
@@ -80,20 +81,20 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
                             labelText: 'Name',
                             labelStyle: const TextStyle(
                               fontSize: 17,
-                              color: Colors.grey,
+                              color: unselected,
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: const BorderSide(
                                 width: 2,
-                                color: Colors.grey
+                                color: unselected
                               ),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: const BorderSide(
                                 width: 2,
-                                color: Color.fromARGB(255, 51, 60, 141)
+                                color: prColor
                               )
                             )
                           ),
@@ -126,26 +127,29 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
                             labelText: 'Phone No.',
                             labelStyle: const TextStyle(
                               fontSize: 17,
-                              color: Colors.grey,
+                              color: unselected,
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: const BorderSide(
                                 width: 2,
-                                color: Colors.grey
+                                color: unselected
                               ),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: const BorderSide(
                                 width: 2,
-                                color: Color.fromARGB(255, 51, 60, 141)
+                                color: prColor
                               )
                             )
                           ),
                           validator: (value) {
                     if (value!.isEmpty) {
                       return 'Phone No. Required';
+                    }
+                    if(value.length > 10 || value.length <10){
+                      return 'Invalid Phone Number';
                     }
                     return null;
                   },
@@ -161,7 +165,6 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
                         child: TextFormField(
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           textInputAction: TextInputAction.next,
-                          keyboardType: TextInputType.number,
                           focusNode: username_,
                           controller: username,
                           decoration:  InputDecoration(
@@ -172,20 +175,20 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
                             labelText: 'Email',
                             labelStyle: const TextStyle(
                               fontSize: 17,
-                              color: Colors.grey,
+                              color: unselected,
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: const BorderSide(
                                 width: 2,
-                                color: Colors.grey
+                                color: unselected
                               ),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: const BorderSide(
                                 width: 2,
-                                color: Color.fromARGB(255, 51, 60, 141)
+                                color: prColor
                               )
                             )
                           ),
@@ -193,7 +196,13 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
                     if (value!.isEmpty) {
                       return 'Email Required';
                     }
-                    return null;
+                    if(
+                      value.contains('@')
+                    ){
+                      return null;
+                    }else{
+                      return 'Invalid email'; 
+                    }
                   },
                         ),
                       ),
@@ -237,20 +246,20 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
                             labelText: 'Password',
                             labelStyle: const TextStyle(
                               fontSize: 17,
-                              color: Colors.grey,
+                              color: unselected,
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: const BorderSide(
                                 width: 2,
-                                color: Colors.grey
+                                color: unselected
                               ),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: const BorderSide(
                                 width: 2,
-                                color: Color.fromARGB(255, 51, 60, 141)
+                                color: prColor
                               )
                             )
                           ),
@@ -262,13 +271,15 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
                   },
                         ),
                       ),
-                      //const Spacer(),
+                      const SizedBox(
+                        height: 10,
+                      ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)
                         ),
-                        backgroundColor: const Color.fromARGB(255, 51, 60, 141)
+                        backgroundColor: prColor
                       ),
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
@@ -283,11 +294,11 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
                           } 
                         }
                       ,
-                      child: Text('Register',
+                      child: const Text('Register',
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
-                        color: Colors.indigo[50]
+                        color: secColor
                       ),),
                       
                     ),

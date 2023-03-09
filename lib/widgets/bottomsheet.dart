@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:money_management/db/functions/colourfunctions/color.dart';
-import 'package:money_management/screens/addcategory.dart';
-import 'package:money_management/screens/addex.dart';
-import 'package:money_management/screens/addin.dart';
+import 'package:money_management/db/functions/color.dart';
+import 'package:money_management/screens/category/addcategory.dart';
+import 'package:money_management/screens/expense/addex.dart';
+import 'package:money_management/screens/income/addin.dart';
 
 Widget bottomSheet(BuildContext context) {
   return SizedBox(
@@ -38,6 +38,7 @@ Widget bottomSheet(BuildContext context) {
                 ),
              TextButton(
               onPressed: () {
+                Navigator.pop(context);
                 Navigator.push(
                   context, 
                   MaterialPageRoute(
@@ -64,6 +65,7 @@ Widget bottomSheet(BuildContext context) {
                 ),
              TextButton(
               onPressed: () {
+                Navigator.pop(context);
                 Navigator.push(
                   context, 
                   MaterialPageRoute(
@@ -90,6 +92,7 @@ Widget bottomSheet(BuildContext context) {
                 ),
                 TextButton(
               onPressed: () {
+                Navigator.pop(context);
                 Navigator.push(
                   context, 
                   MaterialPageRoute(

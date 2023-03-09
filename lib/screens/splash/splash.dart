@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:money_management/screens/home.dart';
-import 'package:money_management/screens/login.dart';
+import 'package:money_management/screens/login/login.dart';
+import 'package:money_management/widgets/bottomnavigation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ScreenSplash extends StatefulWidget {
@@ -47,15 +47,14 @@ class _ScreenSplashState extends State<ScreenSplash> {
 
   navigateToHome(BuildContext context) async {
    var prefs = await SharedPreferences.getInstance();
-    //ignore: unused_local_variable, non_constant_identifier_names
-   var LoggedIn = prefs.getBool('IsLogged');
+   var loggedIn = prefs.getBool('isLogged');
    await Future.delayed(const Duration(seconds: 3));
-   if (LoggedIn == true) {
+   if (loggedIn == true) {
      // ignore: use_build_context_synchronously
      Navigator.pushReplacement(
           context,
          MaterialPageRoute(
-            builder: (context) =>ScreenHome(),
+            builder: (context) =>const BottomNavigation(),
          ));
    } else {
     //  ignore: use_build_context_synchronously
@@ -65,8 +64,5 @@ class _ScreenSplashState extends State<ScreenSplash> {
             builder: (context) => const ScreenLogIn(),
          ));
    }
-     // ignore: use_build_context_synchronously
-    
     }
- // }
 }

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:money_management/db/functions/color.dart';
 
-Column categoryBackground(BuildContext context){
+Column aboutBackground(BuildContext context){
   return Column(
               children: [
                 Container(
                 width: double.infinity,
                 height: 240,
                 decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 51, 60, 141),
+                  color: prColor,
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(20),
                     bottomRight: Radius.circular(20)
@@ -26,17 +27,24 @@ Column categoryBackground(BuildContext context){
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(''),
-                            Text(
-                              'Add Category',
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Icon(Icons.arrow_back,
+                                color: secColor,
+                                ),
+                          ),
+                            const Text(
+                              'About',
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,
-                                color: Colors.indigo[50]
+                                color: secColor
                               ),
                               ),
-                              Icon(Icons.category,
-                              color: Colors.indigo[50],
+                              const Icon(Icons.info_outline_rounded,
+                              color: secColor,
                               )
                         ],
                       ),

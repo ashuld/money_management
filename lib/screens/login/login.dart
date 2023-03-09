@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:money_management/screens/create.dart';
-import 'package:money_management/screens/home.dart';
+import 'package:money_management/db/functions/color.dart';
+import 'package:money_management/screens/register/create.dart';
 import 'package:money_management/widgets/bottomnavigation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,15 +14,28 @@ class ScreenLogIn extends StatefulWidget {
 class _ScreenLogInState extends State<ScreenLogIn> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController pinController = TextEditingController();
+  FocusNode usernameController_ = FocusNode();
+  FocusNode passwordController_ = FocusNode();
 
   var formKey = GlobalKey<FormState>();
   bool error = false;
   bool obscure = true;
 
   @override
+  void initState() {
+    super.initState();
+    usernameController_.addListener(() {
+      setState(() {});
+     });
+     passwordController_.addListener(() {
+      setState(() {});
+     });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.indigo[50],
+      backgroundColor: secColor,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -97,7 +110,7 @@ class _ScreenLogInState extends State<ScreenLogIn> {
                   visible: error,
                   child: const Text(
                     'Incorrect Username or Pin',
-                    style: TextStyle(color: Colors.red),
+                    style: TextStyle(color: expensecol),
                   ),
                 ),
                 const SizedBox(
@@ -115,12 +128,12 @@ class _ScreenLogInState extends State<ScreenLogIn> {
                       child: const Text(
                         'Create an Account',
                         style: TextStyle(
-                          color:  Color.fromARGB(255, 51, 60, 141)
+                          color:  prColor
                         )),),
                       const Spacer(),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 51, 60, 141)
+                        backgroundColor: prColor
                       ),
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
@@ -129,11 +142,11 @@ class _ScreenLogInState extends State<ScreenLogIn> {
                             var prefs = await SharedPreferences.getInstance();
                             prefs.setBool('isLogged', true);
                             // ignore: use_build_context_synchronously
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const BottomNavigation(),
-                                ));
+                            Navigator.pushAndRemoveUntil(context, 
+                            MaterialPageRoute(
+                              builder: (context) => BottomNavigation(),
+                              ), 
+                              (route) => false);
                           } else {
                             setState(() {
                               error = true;
@@ -145,11 +158,11 @@ class _ScreenLogInState extends State<ScreenLogIn> {
                           }
                         }
                       },
-                      child: Text('Login',
+                      child: const Text('Login',
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
-                        color: Colors.indigo[50]
+                        color: secColor
                       ),),
                       
                     ),

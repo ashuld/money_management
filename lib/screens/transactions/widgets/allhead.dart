@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../db/functions/colourfunctions/color.dart';
+import 'package:money_management/db/functions/color.dart';
+
 
 Widget transactionHead(BuildContext ctx){
   return Stack(
@@ -10,7 +11,7 @@ Widget transactionHead(BuildContext ctx){
                   width: double.infinity,
                   height: 150,
                   decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 51, 60, 141),
+                    color: prColor,
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(40),
                       bottomRight: Radius.circular(40)
@@ -35,21 +36,21 @@ Widget transactionHead(BuildContext ctx){
                             onTap: () {
                                 Navigator.pop(ctx);
                             },
-                            child: Icon(
+                            child: const Icon(
                               Icons.arrow_back,
-                              color: Colors.indigo[50],
+                              color: secColor,
                             ),
                           ),
-                            Text(
+                            const Text(
                               'Transactions',
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,
-                                color: Colors.indigo[50]
+                                color: secColor
                               ),
                               ),
-                              Icon(Icons.money,
-                              color: Colors.indigo[50],
+                              const Icon(Icons.money,
+                              color: secColor,
                               )
                         ],
                       ),
@@ -72,7 +73,7 @@ Widget transactionHead(BuildContext ctx){
               ],
             ),
             Positioned(
-              top: 60,
+              top: 65,
               left: 37,
               child: Container(
                 height: 170,
@@ -80,13 +81,13 @@ Widget transactionHead(BuildContext ctx){
                 decoration: BoxDecoration(
                   boxShadow: const [
                     BoxShadow(
-                      color: Color.fromARGB(255, 51, 60, 141),
+                      color: prColor,
                       offset: Offset(0, 6),
                       blurRadius: 12,
                       spreadRadius: 1
                     )
                   ],
-                  color: Colors.white,
+                  color: plain,
                   borderRadius: BorderRadius.circular(15)
                 ),
                 child: Column(
@@ -102,7 +103,7 @@ Widget transactionHead(BuildContext ctx){
                         children: const [
                            Text('Total Balance',
                           style: TextStyle(
-                            color: Color.fromARGB(255, 51, 60, 141),
+                            color: prColor,
                             fontSize: 18,
                             fontWeight: FontWeight.w500
                           ),
@@ -124,7 +125,7 @@ Widget transactionHead(BuildContext ctx){
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 25,
-                              color: Colors.green
+                              color: incomecol
                             ),
                           )
                         ],
@@ -147,16 +148,16 @@ Widget transactionHead(BuildContext ctx){
                                 children: const [
                                   CircleAvatar(
                                     radius: 13,
-                                    backgroundColor:  Colors.white,
+                                    backgroundColor:  plain,
                                     child: Icon(
                                       Icons.arrow_downward,
-                                      color:  Color.fromARGB(255, 51, 60, 141),
+                                      color:  prColor,
                                       size: 19,),
                                   ),
                                   Text(
                                     'Income',
                                     style: TextStyle(
-                                    color: Color.fromARGB(255, 51, 60, 141),
+                                    color: prColor,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500
                                     ),
@@ -171,16 +172,16 @@ Widget transactionHead(BuildContext ctx){
                                 children: const [
                                   CircleAvatar(
                                     radius: 13,
-                                    backgroundColor:  Colors.white,
+                                    backgroundColor:  plain,
                                     child: Icon(
                                       Icons.arrow_upward,
-                                      color:  Color.fromARGB(255, 51, 60, 141),
+                                      color:  prColor,
                                       size: 19,),
                                   ),
                                   Text(
                                     'Expenses',
                                     style: TextStyle(
-                                    color: Color.fromARGB(255, 51, 60, 141),
+                                    color: prColor,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500
                                     ),
@@ -207,7 +208,7 @@ Widget transactionHead(BuildContext ctx){
                             style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 18,
-                              color: Colors.green
+                              color: incomecol
                             ),
                             ),
                             Text(
@@ -215,7 +216,7 @@ Widget transactionHead(BuildContext ctx){
                             style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 18,
-                              color: Colors.red
+                              color: expensecol
                             ),
                             ),
                         ],

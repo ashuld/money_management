@@ -1,8 +1,152 @@
 import 'package:flutter/material.dart';
-import '../db/functions/colourfunctions/color.dart';
+import 'package:money_management/db/functions/color.dart';
+import 'package:money_management/db/model/listdata.dart';
+import 'package:money_management/screens/home/widgets/home_seeall.dart';
+import 'package:money_management/screens/home/widgets/homelist.dart';
+import 'package:money_management/screens/login/login.dart';
+import 'package:money_management/screens/settings/settings.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-Widget head(context){
-  return Stack(
+
+
+class ScreenHome extends StatefulWidget {
+  const ScreenHome({super.key});
+
+  @override
+  State<ScreenHome> createState() => _ScreenHomeState();
+}
+
+class _ScreenHomeState extends State<ScreenHome> {
+  final GlobalKey<ScaffoldState> key_ = GlobalKey();
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        key: key_,
+        endDrawer: Drawer(
+            elevation: 10.0,
+        child: ListView(
+          children: [
+            DrawerHeader(
+              decoration: const BoxDecoration(
+                  color: prColor
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text('User',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: secColor,
+                            fontSize: 25
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10
+                        ),
+                      Text('5544545454511',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color: secColor,
+                            fontSize: 14.0
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10
+                        ),
+                      Text('email@gmail.com',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color: secColor,
+                            fontSize: 14.0
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.logout_outlined,
+                color: prColor,
+                ),
+              title: const Text(
+                'Log Out', 
+                style: TextStyle(
+                  color: prColor,
+                  fontSize: 18
+                  ),
+                  ),
+              onTap: () async {
+                var prefs = await SharedPreferences.getInstance();
+                prefs.setBool('isLogged', false);
+                // ignore: use_build_context_synchronously
+                Navigator.pop(context);
+                // ignore: use_build_context_synchronously
+                Navigator
+                .push(
+                  context, 
+                  MaterialPageRoute(
+                    builder: (context) => const ScreenLogIn(),
+                    )
+                  );
+              },
+            ),
+            const Divider(
+              height: 3.0
+              ),
+            ListTile(
+              leading: const Icon(
+                Icons.settings,
+                color: prColor,
+                ),
+              title: const Text(
+                'Settings', 
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  color: prColor,
+                  fontSize: 18)),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator
+                .of(context)
+                .push(
+                  MaterialPageRoute(
+                    builder:(context) => const ScreenSettings(), 
+                    ));
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.close,
+                color: prColor,
+                ),
+              title: const Text(
+                'Close Drawer', 
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  color: prColor,
+                  fontSize: 18)),
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
+  ),
+        backgroundColor: secColor,
+        body:  SafeArea(
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  height: 330,
+                  child: Stack(
           children: [
             Column(
               children: [
@@ -55,7 +199,7 @@ Widget head(context){
                               child: Text('User',
                               style: TextStyle(
                                 color: secColor,
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.bold,
                                 fontSize: 25,
                               ),
                               ),
@@ -83,7 +227,7 @@ Widget head(context){
                       spreadRadius: 1
                     )
                   ],
-                  color: Colors.white,
+                  color: plain,
                   borderRadius: BorderRadius.circular(15)
                 ),
                 child: Column(
@@ -144,7 +288,7 @@ Widget head(context){
                                 children: const [
                                   CircleAvatar(
                                     radius: 13,
-                                    backgroundColor:  Colors.white,
+                                    backgroundColor:  plain,
                                     child: Icon(
                                       Icons.arrow_downward,
                                       color:  prColor,
@@ -168,7 +312,7 @@ Widget head(context){
                                 children: const [
                                   CircleAvatar(
                                     radius: 13,
-                                    backgroundColor:  Colors.white,
+                                    backgroundColor:  plain,
                                     child: Icon(
                                       Icons.arrow_upward,
                                       color:  prColor,
@@ -223,5 +367,24 @@ Widget head(context){
               ),
             )
           ],
-        );
+        )
+                  ),
+              ),
+              SliverToBoxAdapter(
+                child: homeSeeall(context)
+              ),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    return homeList(index);
+                  },
+                  childCount: geter().length
+                  ),
+                  )
+            ],
+          ),
+          ),
+      ),
+    );
+  }
 }
