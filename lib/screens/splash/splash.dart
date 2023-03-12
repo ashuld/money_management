@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money_management/db/functions/db_functions.dart';
 import 'package:money_management/screens/login/login.dart';
 import 'package:money_management/widgets/bottomnavigation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,12 +10,13 @@ class ScreenSplash extends StatefulWidget {
   @override
   State<ScreenSplash> createState() => _ScreenSplashState();
 }
-
+ late String userr;
 class _ScreenSplashState extends State<ScreenSplash> {
   @override
   void initState() {
     super.initState();
     navigateToHome(context);
+    userr =name();
   }
   
 

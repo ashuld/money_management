@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:money_management/db/functions/color.dart';
+import 'package:money_management/db/functions/db_functions.dart';
+import 'package:money_management/db/model/data.dart';
 import 'package:money_management/widgets/bottomnavigation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -11,12 +13,12 @@ class ScreenCreateAccount extends StatefulWidget {
   @override
   State<ScreenCreateAccount> createState() => _ScreenCreateAccountState();
 }
-
+late String myname;
 class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
-  final TextEditingController name = TextEditingController();
-  final TextEditingController phone = TextEditingController();
-  final TextEditingController username = TextEditingController();
-  final TextEditingController password = TextEditingController();
+  final  name = TextEditingController();
+  final  phone = TextEditingController();
+  final  username = TextEditingController();
+  final  password = TextEditingController();
   FocusNode name_ =FocusNode();
   FocusNode phone_ =FocusNode();
   FocusNode username_ =FocusNode();
@@ -283,14 +285,7 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
                       ),
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
-                            var prefs = await SharedPreferences.getInstance();
-                            prefs.setBool('isLogged', true);
-                            // ignore: use_build_context_synchronously
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const BottomNavigation(),
-                                ));
+                            onbuttonclick();
                           } 
                         }
                       ,
@@ -312,4 +307,36 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
       )
     );
   }
+
+Future <void> onbuttonclick() async {
+final namedb = name.text.trim();
+myname=namedb;
+final phonedb = phone.text.trim();
+final usernamedb = username.text;
+final passworddb = password.text;
+ScaffoldMessenger.of(context).showSnackBar(
+  const SnackBar(
+    backgroundColor: prColor,
+    behavior: SnackBarBehavior.floating,
+    content: Text('Account Created',
+    style: TextStyle(
+      fontStyle: FontStyle.italic,
+      color: secColor
+    ),
+    )));
+    final userdetails = user(
+      name: namedb, 
+      phn: phonedb, 
+      mail: usernamedb, 
+      password: passworddb);
+      adduser(userdetails);
+      var prefs = await SharedPreferences.getInstance();
+      prefs.setBool('isLogged', true);
+// ignore: use_build_context_synchronously
+      await Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+      builder: (context) => const BottomNavigation(),
+      ));
+}
 }

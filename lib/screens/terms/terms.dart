@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:money_management/db/functions/color.dart';
-import 'package:money_management/screens/about/widgets/aboutbg.dart';
-import 'package:money_management/screens/about/widgets/whitespaceab.dart';
+import 'package:money_management/screens/terms/widgets/spaceterms.dart';
 import 'package:money_management/screens/terms/widgets/termsbg.dart';
 
 class ScreenTerms extends StatelessWidget {
@@ -18,7 +17,7 @@ class ScreenTerms extends StatelessWidget {
             termsBackground(context),
             Positioned(
               top: 120,
-              child: spaceAbout()
+              child: spaceTerms()
               )
           ],
         )

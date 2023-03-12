@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:money_management/db/functions/color.dart';
+import 'package:money_management/db/functions/db_functions.dart';
+import 'package:money_management/db/model/data.dart';
 import 'package:money_management/db/model/listdata.dart';
 import 'package:money_management/screens/home/widgets/home_seeall.dart';
 import 'package:money_management/screens/home/widgets/homelist.dart';
 import 'package:money_management/screens/login/login.dart';
+import 'package:money_management/screens/register/create.dart';
 import 'package:money_management/screens/settings/settings.dart';
+import 'package:money_management/screens/splash/splash.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
 
 class ScreenHome extends StatefulWidget {
-  const ScreenHome({super.key});
-
   @override
   State<ScreenHome> createState() => _ScreenHomeState();
 }
-
 class _ScreenHomeState extends State<ScreenHome> {
   final GlobalKey<ScaffoldState> key_ = GlobalKey();
   @override
   Widget build(BuildContext context) {
+    notify();
     return SafeArea(
       child: Scaffold(
         key: key_,
@@ -31,7 +33,10 @@ class _ScreenHomeState extends State<ScreenHome> {
               decoration: const BoxDecoration(
                   color: prColor
               ),
-              child: Row(
+              child: ValueListenableBuilder(
+                valueListenable: usernotifier, 
+                builder: (BuildContext context, List<user> userlist, Widget? child) {
+                  return Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Column(
@@ -68,7 +73,9 @@ class _ScreenHomeState extends State<ScreenHome> {
                     ],
                   )
                 ],
-              ),
+              );
+                },
+                ),
             ),
             ListTile(
               leading: const Icon(
@@ -164,8 +171,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(top: 15, left: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: ListView(
                           children:  [
                             Padding(
                               padding: const EdgeInsets.symmetric(
@@ -192,18 +198,19 @@ class _ScreenHomeState extends State<ScreenHome> {
                                 ],
                               ),
                             ),
-                            const Padding(
+                             const Padding(
                               padding:  EdgeInsets.symmetric(
                                 horizontal: 15
                               ),
-                              child: Text('User',
+                              child: 
+                              Text('myname',
                               style: TextStyle(
                                 color: secColor,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 25,
                               ),
                               ),
-                            )
+                            )   
                           ],
                         ),
                       )
@@ -376,7 +383,7 @@ class _ScreenHomeState extends State<ScreenHome> {
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
-                    return homeList(index);
+                    return homeList(context, index);
                   },
                   childCount: geter().length
                   ),

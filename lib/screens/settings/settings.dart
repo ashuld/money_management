@@ -22,7 +22,7 @@ class _ScreenSettingsState extends State<ScreenSettings> {
             settingsBackground(context),
             Positioned(
               top: 120,
-              child: settingsTiles()
+              child: settingsTiles(context)
               )
           ],
         )

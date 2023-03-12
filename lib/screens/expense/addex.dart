@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
+import 'package:money_management/db/functions/color.dart';
 import 'package:money_management/screens/expense/widgets/addexbackground.dart';
 
 class ScreenAddExpense extends StatefulWidget {
@@ -19,12 +20,7 @@ class _ScreenAddExpenseState extends State<ScreenAddExpense> {
   FocusNode ex =FocusNode();
   FocusNode amount_ =FocusNode();
   FocusNode name = FocusNode();
-  List<String> item= [
-    'Food',
-    'Entertainment',
-    'Education',
-    'Transportation'
-  ];
+
   @override
   void initState() {
     super.initState();
@@ -41,7 +37,7 @@ class _ScreenAddExpenseState extends State<ScreenAddExpense> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.indigo[50],
+      backgroundColor: secColor,
       body:SafeArea(
         child: Stack(
           alignment: Alignment.center,
@@ -52,7 +48,7 @@ class _ScreenAddExpenseState extends State<ScreenAddExpense> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: Colors.white
+                  color: plain
                 ),
                 height: 550,
                 width: 340,
@@ -69,17 +65,17 @@ class _ScreenAddExpenseState extends State<ScreenAddExpense> {
                         padding: const EdgeInsets.symmetric(
                           horizontal: 15
                         ),
-                        width: 300,
+                        width: 310,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(
                             width: 2,
-                            color: Colors.grey
+                            color: unselected
                           )
                         ),
                         child: DropdownButton<String>(
                           value: selectedItem,
-                          items: item.map((e) => DropdownMenuItem(
+                          items: expenseitem.map((e) => DropdownMenuItem(
                             value: e,
                             child: Container(
                               child: Row(
@@ -95,14 +91,14 @@ class _ScreenAddExpenseState extends State<ScreenAddExpense> {
                                     e,
                                     style: const TextStyle(
                                       fontSize: 18,
-                                      color: Color.fromARGB(255, 51, 60, 141)
+                                      color: prColor
                                     ),
                                   )
                                 ],
                               ),
                             ),
                             )).toList(), 
-                            selectedItemBuilder: (context) => item
+                            selectedItemBuilder: (context) => expenseitem
                             .map((e) => Row(
                               children: [
                                 SizedBox(
@@ -115,7 +111,7 @@ class _ScreenAddExpenseState extends State<ScreenAddExpense> {
                                 Text(e,
                                 style: const TextStyle(
                                       fontSize: 18,
-                                      color: Color.fromARGB(255, 51, 60, 141)
+                                      color: prColor
                                     ),
                                 )
                               ],
@@ -123,10 +119,10 @@ class _ScreenAddExpenseState extends State<ScreenAddExpense> {
                             .toList(),
                             hint: const Text('Category',
                             style: TextStyle(
-                              color: Colors.grey
+                              color: unselected
                             ),
                             ),
-                            dropdownColor: Colors.indigo[50],
+                            dropdownColor: secColor,
                             isExpanded: true,
                             underline: Container(),
                           onChanged: (value) {
@@ -143,7 +139,8 @@ class _ScreenAddExpenseState extends State<ScreenAddExpense> {
                       padding: const EdgeInsets.symmetric(
                         horizontal: 15
                       ),
-                      child: TextField(
+                      child: TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         focusNode: name,
                         controller: expense,
                         decoration:  InputDecoration(
@@ -154,20 +151,20 @@ class _ScreenAddExpenseState extends State<ScreenAddExpense> {
                           labelText: 'Expense',
                           labelStyle: const TextStyle(
                             fontSize: 17,
-                            color: Colors.grey,
+                            color: unselected,
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: const BorderSide(
                               width: 2,
-                              color: Colors.grey
+                              color: unselected
                             ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: const BorderSide(
                               width: 2,
-                              color: Color.fromARGB(255, 51, 60, 141)
+                              color: prColor
                             )
                           )
                         ),
@@ -180,7 +177,8 @@ class _ScreenAddExpenseState extends State<ScreenAddExpense> {
                       padding: const EdgeInsets.symmetric(
                         horizontal: 15
                       ),
-                      child: TextField(
+                      child: TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         keyboardType: TextInputType.number,
                         focusNode: amount_,
                         controller: amount,
@@ -223,12 +221,12 @@ class _ScreenAddExpenseState extends State<ScreenAddExpense> {
                           color: Colors.grey
                         )
                       ),
-                      width: 300,
+                      width: 310,
                       child: TextButton(
                         onPressed: () async {
                           DateTime? newDate = await showDatePicker(
                             context: context, 
-                            initialDate: date, 
+                            initialDate: DateTime.now(), 
                             firstDate: DateTime(2016), 
                             lastDate: DateTime(2100));
                             if (newDate == Null) return;
@@ -253,7 +251,7 @@ class _ScreenAddExpenseState extends State<ScreenAddExpense> {
                       padding: const EdgeInsets.symmetric(
                         horizontal: 15
                       ),
-                      child: TextField(
+                      child: TextFormField(
                         focusNode: ex,
                         controller: note,
                         decoration:  InputDecoration(

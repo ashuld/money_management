@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:money_management/db/functions/color.dart';
+import 'package:money_management/screens/about/about.dart';
+import 'package:money_management/screens/privacy/privacy.dart';
+import 'package:money_management/screens/terms/terms.dart';
 
-Widget settingsTiles(){
+Widget settingsTiles( context){
   return Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
@@ -10,11 +13,11 @@ Widget settingsTiles(){
                 height: 550,
                 width: 340,
                 child: Column(
-                  children: const [
-                    SizedBox(
+                  children:  [
+                    const SizedBox(
                       height: 30,
                     ),
-                    Padding(
+                    const Padding(
                       padding:  EdgeInsets.symmetric(
                         horizontal: 15
                       ),
@@ -34,42 +37,23 @@ Widget settingsTiles(){
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Padding(
-                      padding:  EdgeInsets.symmetric(
+                     Padding(
+                      padding:  const EdgeInsets.symmetric(
                         horizontal: 15
                       ),
                       child: ListTile(
-                        leading: Icon(Icons.currency_exchange,
+                        onTap: () => Navigator.push(
+                          context, 
+                          MaterialPageRoute(
+                            builder: (context) => const ScreenTerms(),)), 
+                        leading: const Icon(Icons.description,
                         size: 30,
                         color: prColor
                         ),
-                        title: Center(
-                          child: Text(
-                            'Change Currency',
-                            style: TextStyle(
-                              color: prColor,
-                              fontWeight: FontWeight.w700
-                            ),
-                            ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding:  EdgeInsets.symmetric(
-                        horizontal: 15
-                      ),
-                      child: ListTile(
-                        leading: Icon(Icons.description,
-                        size: 30,
-                        color: prColor
-                        ),
-                        title: Center(
+                        title: const Center(
                           child: Text(
                             'Terms and Conditions',
                             style: TextStyle(
@@ -80,19 +64,26 @@ Widget settingsTiles(){
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Padding(
-                      padding:  EdgeInsets.symmetric(
+                      padding:  const EdgeInsets.symmetric(
                         horizontal: 15
                       ),
                       child: ListTile(
-                        leading: Icon(Icons.privacy_tip,
+                        onTap: () {
+                          Navigator.push(
+                            context, 
+                            MaterialPageRoute(
+                              builder: (context) => const ScreenPrivacy(), 
+                              ));
+                        },
+                        leading: const Icon(Icons.privacy_tip,
                         size: 30,
                         color: prColor
                         ),
-                        title: Center(
+                        title: const Center(
                           child: Text(
                             'Privacy Policy',
                             style: TextStyle(
@@ -103,19 +94,22 @@ Widget settingsTiles(){
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Padding(
-                      padding:  EdgeInsets.symmetric(
+                     Padding(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 15
                       ),
                       child: ListTile(
-                        leading: Icon(Icons.info_outline_rounded,
+                        onTap: () => Navigator.push(
+                          context, 
+                          MaterialPageRoute(builder: (context) => const ScreenAbout(),)),
+                        leading: const Icon(Icons.info_outline_rounded,
                         size: 30,
                         color: prColor
                         ),
-                        title: Center(
+                        title: const Center(
                           child: Text(
                             'About',
                             style: TextStyle(

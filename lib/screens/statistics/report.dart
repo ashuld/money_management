@@ -10,7 +10,7 @@ class ScreenReport extends StatefulWidget {
 }
 
 class _ScreenReportState extends State<ScreenReport> {
-  List day =['Day','Week','Month','Year'];
+  List day =['Week','Month','Year'];
   int indexColor = 0 ;
   Map<String, double> dataMap={
     "Entertainment":60,
@@ -47,7 +47,7 @@ class _ScreenReportState extends State<ScreenReport> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        ...List.generate(4, (index) {
+                        ...List.generate(3, (index) {
                           return GestureDetector(
                             onTap: () {
                               setState(() {

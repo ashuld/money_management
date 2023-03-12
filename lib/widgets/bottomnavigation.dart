@@ -13,7 +13,7 @@ class BottomNavigation extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigation> {
   int indexColour = 0;
-  List screen = [const ScreenHome(),const ScreenReport()];
+  List screen = [ ScreenHome(),const ScreenReport()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

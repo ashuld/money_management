@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money_management/db/functions/color.dart';
 import 'package:money_management/screens/income/widgets/addinbackground.dart';
 
 class ScreenAddIncome extends StatefulWidget {
@@ -65,23 +66,23 @@ class _ScreenAddIncomeState extends State<ScreenAddIncome> {
                         padding: const EdgeInsets.symmetric(
                           horizontal: 15
                         ),
-                        width: 300,
+                        width: 310,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(
                             width: 2,
-                            color: Colors.grey
+                            color: unselected
                           )
                         ),
                         child: DropdownButton<String>(
                           value: selectedItem,
-                          items: item.map((e) => DropdownMenuItem(
+                          items: incomeitem.map((e) => DropdownMenuItem(
                             value: e,
                             child: Row(
                               children: [
                                 SizedBox(
                                   width: 40,
-                                  child: Image.asset('assets/icons/icons8-atm-card-96.png'),
+                                  child: Image.asset('assets/icons/icons8-transaction-96.png'),
                                 ),
                                 const SizedBox(
                                   width: 10,
@@ -90,18 +91,18 @@ class _ScreenAddIncomeState extends State<ScreenAddIncome> {
                                   e,
                                   style: const TextStyle(
                                     fontSize: 18,
-                                    color: Color.fromARGB(255, 51, 60, 141)
+                                    color: prColor
                                   ),
                                 )
                               ],
                             ),
                             )).toList(), 
-                            selectedItemBuilder: (context) => item
+                            selectedItemBuilder: (context) => incomeitem
                             .map((e) => Row(
                               children: [
                                 SizedBox(
                                   width: 42,
-                                  child: Image.asset('assets/icons/icons8-atm-card-96.png'),
+                                  child: Image.asset('assets/icons/icons8-transaction-96.png'),
                                 ),
                                 const SizedBox(
                                   width: 5,
@@ -109,7 +110,7 @@ class _ScreenAddIncomeState extends State<ScreenAddIncome> {
                                 Text(e,
                                 style: const TextStyle(
                                       fontSize: 18,
-                                      color: Color.fromARGB(255, 51, 60, 141)
+                                      color: prColor
                                     ),
                                 )
                               ],
@@ -117,10 +118,10 @@ class _ScreenAddIncomeState extends State<ScreenAddIncome> {
                             .toList(),
                             hint: const Text('Category',
                             style: TextStyle(
-                              color: Colors.grey
+                              color: unselected
                             ),
                             ),
-                            dropdownColor: Colors.indigo[50],
+                            dropdownColor: secColor,
                             isExpanded: true,
                             underline: Container(),
                           onChanged: (value) {
@@ -148,20 +149,20 @@ class _ScreenAddIncomeState extends State<ScreenAddIncome> {
                           labelText: 'Income',
                           labelStyle: const TextStyle(
                             fontSize: 17,
-                            color: Colors.grey,
+                            color: unselected,
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: const BorderSide(
                               width: 2,
-                              color: Colors.grey
+                              color: unselected
                             ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: const BorderSide(
                               width: 2,
-                              color: Color.fromARGB(255, 51, 60, 141)
+                              color: prColor
                             )
                           )
                         ),
@@ -186,20 +187,20 @@ class _ScreenAddIncomeState extends State<ScreenAddIncome> {
                           labelText: 'Amount',
                           labelStyle: const TextStyle(
                             fontSize: 17,
-                            color: Colors.grey,
+                            color: unselected,
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: const BorderSide(
                               width: 2,
-                              color: Colors.grey
+                              color: unselected
                             ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: const BorderSide(
                               width: 2,
-                              color: Color.fromARGB(255, 51, 60, 141)
+                              color: prColor
                             )
                           )
                         ),
@@ -214,10 +215,10 @@ class _ScreenAddIncomeState extends State<ScreenAddIncome> {
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
                           width: 2,
-                          color: Colors.grey
+                          color: unselected
                         )
                       ),
-                      width: 300,
+                      width: 310,
                       child: TextButton(
                         onPressed: () async {
                           DateTime? newDate = await showDatePicker(
@@ -258,20 +259,20 @@ class _ScreenAddIncomeState extends State<ScreenAddIncome> {
                           labelText: 'Note',
                           labelStyle: const TextStyle(
                             fontSize: 17,
-                            color: Colors.grey,
+                            color: unselected,
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: const BorderSide(
                               width: 2,
-                              color: Colors.grey
+                              color: unselected
                             ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: const BorderSide(
                               width: 2,
-                              color: Color.fromARGB(255, 51, 60, 141)
+                              color: prColor
                             )
                           )
                         ),
@@ -286,7 +287,7 @@ class _ScreenAddIncomeState extends State<ScreenAddIncome> {
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
-                          color: const Color.fromARGB(255, 51, 60, 141)
+                          color: prColor
                         ),
                         width: 120,
                         height: 50,
@@ -295,7 +296,7 @@ class _ScreenAddIncomeState extends State<ScreenAddIncome> {
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w500,
-                            color: Color.fromARGB(255, 191, 198, 236)
+                            color: secColor
                           ),
                         ),
                       ),
