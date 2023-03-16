@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:money_management/db/functions/color.dart';
 import 'package:money_management/db/functions/db_functions.dart';
-import 'package:money_management/db/model/data.dart';
+import 'package:money_management/db/model/transactions.dart';
+import 'package:money_management/db/model/userdata.dart';
 import 'package:money_management/widgets/bottomnavigation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -310,7 +312,6 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
 
 Future <void> onbuttonclick() async {
 final namedb = name.text.trim();
-myname=namedb;
 final phonedb = phone.text.trim();
 final usernamedb = username.text;
 final passworddb = password.text;
@@ -324,7 +325,7 @@ ScaffoldMessenger.of(context).showSnackBar(
       color: secColor
     ),
     )));
-    final userdetails = user(
+    final userdetails = UserModel(
       name: namedb, 
       phn: phonedb, 
       mail: usernamedb, 

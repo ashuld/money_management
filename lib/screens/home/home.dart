@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:money_management/db/functions/color.dart';
 import 'package:money_management/db/functions/db_functions.dart';
-import 'package:money_management/db/model/data.dart';
-import 'package:money_management/db/model/listdata.dart';
+import 'package:money_management/db/model/transactions.dart';
+import 'package:money_management/db/model/userdata.dart';
 import 'package:money_management/screens/home/widgets/home_seeall.dart';
 import 'package:money_management/screens/home/widgets/homelist.dart';
 import 'package:money_management/screens/login/login.dart';
@@ -18,132 +19,150 @@ class ScreenHome extends StatefulWidget {
   State<ScreenHome> createState() => _ScreenHomeState();
 }
 class _ScreenHomeState extends State<ScreenHome> {
+  var name;
+  var phnno;
+  var mail;
+
+  @override
+  void initState() {
+    // notify();
+    
+    super.initState();
+  }
   final GlobalKey<ScaffoldState> key_ = GlobalKey();
   @override
   Widget build(BuildContext context) {
+    // notify();
     notify();
+    final box = Hive.box<ExpenseModel>(expensedb);
     return SafeArea(
       child: Scaffold(
         key: key_,
         endDrawer: Drawer(
             elevation: 10.0,
-        child: ListView(
-          children: [
-            DrawerHeader(
-              decoration: const BoxDecoration(
-                  color: prColor
+        child: ValueListenableBuilder(
+          valueListenable: usernotifier,
+          builder: (BuildContext context,List<UserModel>userlist,Widget? child) {
+            for (var element in userlist) {
+              name = element.name;
+              phnno = element.phn;
+              mail = element.mail;
+            }
+
+            return ListView(
+            children: [
+              DrawerHeader(
+                decoration: const BoxDecoration(
+                    color: prColor
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children:  [
+                    Text(name,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: secColor,
+                          fontSize: 25
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10
+                      ),
+                    Text(phnno,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: secColor,
+                          fontSize: 14.0
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10
+                      ),
+                    Text(mail,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: secColor,
+                          fontSize: 14.0
+                      ),
+                    ),
+                  ],
+                )
+                  ],
+                ),
               ),
-              child: ValueListenableBuilder(
-                valueListenable: usernotifier, 
-                builder: (BuildContext context, List<user> userlist, Widget? child) {
-                  return Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text('User',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: secColor,
-                            fontSize: 25
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10
-                        ),
-                      Text('5544545454511',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            color: secColor,
-                            fontSize: 14.0
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10
-                        ),
-                      Text('email@gmail.com',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            color: secColor,
-                            fontSize: 14.0
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              );
+              ListTile(
+                leading: const Icon(
+                  Icons.logout_outlined,
+                  color: prColor,
+                  ),
+                title: const Text(
+                  'Log Out', 
+                  style: TextStyle(
+                    color: prColor,
+                    fontSize: 18
+                    ),
+                    ),
+                onTap: () async {
+                  var prefs = await SharedPreferences.getInstance();
+                  prefs.setBool('isLogged', false);
+                  // ignore: use_build_context_synchronously
+                  Navigator.pop(context);
+                  // ignore: use_build_context_synchronously
+                  Navigator
+                  .push(
+                    context, 
+                    MaterialPageRoute(
+                      builder: (context) => const ScreenLogIn(),
+                      )
+                    );
                 },
-                ),
-            ),
-            ListTile(
-              leading: const Icon(
-                Icons.logout_outlined,
-                color: prColor,
-                ),
-              title: const Text(
-                'Log Out', 
-                style: TextStyle(
-                  color: prColor,
-                  fontSize: 18
-                  ),
-                  ),
-              onTap: () async {
-                var prefs = await SharedPreferences.getInstance();
-                prefs.setBool('isLogged', false);
-                // ignore: use_build_context_synchronously
-                Navigator.pop(context);
-                // ignore: use_build_context_synchronously
-                Navigator
-                .push(
-                  context, 
-                  MaterialPageRoute(
-                    builder: (context) => const ScreenLogIn(),
-                    )
-                  );
-              },
-            ),
-            const Divider(
-              height: 3.0
               ),
-            ListTile(
-              leading: const Icon(
-                Icons.settings,
-                color: prColor,
+              const Divider(
+                height: 3.0
                 ),
-              title: const Text(
-                'Settings', 
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
+              ListTile(
+                leading: const Icon(
+                  Icons.settings,
                   color: prColor,
-                  fontSize: 18)),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator
-                .of(context)
-                .push(
-                  MaterialPageRoute(
-                    builder:(context) => const ScreenSettings(), 
-                    ));
-              },
-            ),
-            ListTile(
-              leading: const Icon(
-                Icons.close,
-                color: prColor,
-                ),
-              title: const Text(
-                'Close Drawer', 
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
+                  ),
+                title: const Text(
+                  'Settings', 
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    color: prColor,
+                    fontSize: 18)),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator
+                  .of(context)
+                  .push(
+                    MaterialPageRoute(
+                      builder:(context) => const ScreenSettings(), 
+                      ));
+                },
+              ),
+              ListTile(
+                leading: const Icon(
+                  Icons.close,
                   color: prColor,
-                  fontSize: 18)),
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
+                  ),
+                title: const Text(
+                  'Close Drawer', 
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    color: prColor,
+                    fontSize: 18)),
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+          }
         ),
   ),
         backgroundColor: secColor,
@@ -198,18 +217,27 @@ class _ScreenHomeState extends State<ScreenHome> {
                                 ],
                               ),
                             ),
-                             const Padding(
-                              padding:  EdgeInsets.symmetric(
-                                horizontal: 15
-                              ),
-                              child: 
-                              Text('myname',
-                              style: TextStyle(
-                                color: secColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
-                              ),
-                              ),
+                            ValueListenableBuilder(
+                              valueListenable: usernotifier,
+                              builder: (BuildContext context,List<UserModel>userlist, child) {
+                                for (var element in userlist) {
+                                  name = element.name;
+                                }
+                                return  Padding(
+                                padding:  const EdgeInsets.symmetric(
+                                  horizontal: 15
+                                ),
+                                child: 
+                                Text(name,
+                                style: const TextStyle(
+                                  color: secColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25,
+                                ),
+                                ),
+                              );
+                              },
+                              
                             )   
                           ],
                         ),
@@ -385,7 +413,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                   (context, index) {
                     return homeList(context, index);
                   },
-                  childCount: geter().length
+                  childCount: box.length
                   ),
                   )
             ],

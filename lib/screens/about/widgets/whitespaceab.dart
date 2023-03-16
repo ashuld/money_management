@@ -11,10 +11,9 @@ Widget spaceAbout(){
                 width: 340,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(
+                  child: SizedBox(
                     height: 530,
                     width: 300,
-                    color: Colors.greenAccent,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [

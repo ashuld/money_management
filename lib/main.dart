@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:money_management/db/model/data.dart';
-import 'package:money_management/screens/income/addin.dart';
-import 'package:money_management/screens/about/about.dart';
-import 'package:money_management/screens/settings/settings.dart';
+import 'package:money_management/db/functions/db_functions.dart';
+import 'package:money_management/db/model/transactions.dart';
+import 'package:money_management/db/model/userdata.dart';
+import 'package:money_management/screens/splash/splash.dart';
 
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  if (!Hive.isAdapterRegistered(addExpenseAdapter().typeId)) {
-    Hive.registerAdapter(addExpenseAdapter());
+  if (!Hive.isAdapterRegistered(ExpenseModelAdapter().typeId)) {
+    Hive.registerAdapter(ExpenseModelAdapter());
   }
-  if (!Hive.isAdapterRegistered(addIncomeAdapter().typeId)) {
-    Hive.registerAdapter(addIncomeAdapter());
+  if (!Hive.isAdapterRegistered(IncomeModelAdapter().typeId)) {
+    Hive.registerAdapter(IncomeModelAdapter());
   }
-  if (!Hive.isAdapterRegistered(userAdapter().typeId)) {
-    Hive.registerAdapter(userAdapter());
+  if (!Hive.isAdapterRegistered(UserModelAdapter().typeId)) {
+    Hive.registerAdapter(UserModelAdapter());
   }
+   Hive.openBox<ExpenseModel>(expensedb);
+  // await Hive.openBox<addIncome>('incomedb');
+  // await Hive.openBox<user>('usedb');
   runApp(const MyApp());
 }
 
@@ -40,10 +43,10 @@ class MyApp extends StatelessWidget {
       //BottomNavigation() 
       //ScreenAbout()
       //ScreenTerms()
-      ScreenSettings()
+      //ScreenSettings()
       //ScreenPrivacy()
       //const ScreenReport()  
-      //ScreenSplash(),
+      ScreenSplash(),
     );
   }
 }

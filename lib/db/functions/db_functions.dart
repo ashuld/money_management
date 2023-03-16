@@ -1,30 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:money_management/db/model/data.dart';
+import 'package:money_management/db/model/transactions.dart';
+import 'package:money_management/db/model/userdata.dart';
 
-ValueNotifier<List<addExpense>> expensenotifier = ValueNotifier([]);
-ValueNotifier<List<addIncome>> incomenotifier = ValueNotifier([]);
-ValueNotifier<List<user>> usernotifier = ValueNotifier([]);
+ValueNotifier<List<ExpenseModel>> expensenotifier = ValueNotifier([]);
+ValueNotifier<List<IncomeModel>> incomenotifier = ValueNotifier([]);
+ValueNotifier<List<UserModel>> usernotifier = ValueNotifier([]);
 
- String? userName;
 
-name()async{
-    userName = await openuser();
-
-}
 
 
 //expense functions
 final expensedb = 'expense';
-Future<void> addexpense(addExpense value) async {
-  final expenseData = await Hive.openBox<addExpense>(expensedb);
+Future<void> addexpense(ExpenseModel value) async {
+  final expenseData = await Hive.openBox<ExpenseModel>(expensedb);
   final id = await expenseData.add(value);
   value.id = id;
   expensenotifier.value.add(value);
   expensenotifier.notifyListeners();
 }
 Future<void> getallexpense() async {
-  final expenseData = await Hive.openBox<addExpense>(expensedb);
+  final expenseData = await Hive.openBox<ExpenseModel>(expensedb);
   expensenotifier.value.clear();
   expensenotifier.value.addAll(expenseData.values);
   expensenotifier.notifyListeners();
@@ -32,15 +28,15 @@ Future<void> getallexpense() async {
 
 //incomefunctions
 final incomedb = 'income';
-Future<void> addincome(addIncome value) async {
-  final incomeData = await Hive.openBox<addIncome>(incomedb);
+Future<void> addincome(IncomeModel value) async {
+  final incomeData = await Hive.openBox<IncomeModel>(incomedb);
   final id = await incomeData.add(value);
   value.id = id;
   incomenotifier.value.add(value);
   incomenotifier.notifyListeners();
 }
 Future<void> getallincome() async {
-  final incomeData = await Hive.openBox<addIncome>(incomedb);
+  final incomeData = await Hive.openBox<IncomeModel>(incomedb);
   incomenotifier.value.clear();
   incomenotifier.value.addAll(incomeData.values);
   incomenotifier.notifyListeners();
@@ -49,35 +45,27 @@ Future<void> getallincome() async {
 
 
 //userfunctions
-final userdb = 'user';
-Future<void> adduser(user value) async {
-  final userData = await Hive.openBox<user>(userdb);
+final userdb = 'User';
+Future<void> adduser(UserModel value) async {
+  final userData = await Hive.openBox<UserModel>(userdb);
   final id = await userData.add(value);
   value.id = id;
   usernotifier.value.add(value);
   usernotifier.notifyListeners();
 }
 Future<void> getalluser() async {
-  final userData = await Hive.openBox<user>(userdb);
+  final userData = await Hive.openBox<UserModel>(userdb);
   usernotifier.value.clear();
   usernotifier.value.addAll(userData.values);
   usernotifier.notifyListeners();
 }
 
-Future<String> openuser() async{
-final userData = await Hive.openBox<user>(userdb);
-final name = userData.name;
-if(name==null){
-  return "user";
-}
-else{
-return name;
-}
 
-}
+
+
 
 Future<void> notify() async{
-  getallexpense();
-  getallincome();
-  getalluser();
+ await getallexpense();
+ await getallincome();
+  await getalluser();
 }

@@ -16,7 +16,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
   void initState() {
     super.initState();
     navigateToHome(context);
-    userr =name();
+   // userr =name();
   }
   
 
@@ -27,8 +27,8 @@ class _ScreenSplashState extends State<ScreenSplash> {
         decoration: const BoxDecoration(
           color: Color.fromARGB(255, 51, 60, 141)
         ),
-        height: double.infinity,
-        width: double.infinity,
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
         child: Center(
           child: Container(
             height: 120,

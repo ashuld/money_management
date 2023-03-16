@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:money_management/db/functions/color.dart';
+import 'package:money_management/db/model/transactions.dart';
 import 'package:money_management/screens/income/widgets/addinbackground.dart';
 
 class ScreenAddIncome extends StatefulWidget {
@@ -82,7 +84,7 @@ class _ScreenAddIncomeState extends State<ScreenAddIncome> {
                               children: [
                                 SizedBox(
                                   width: 40,
-                                  child: Image.asset('assets/icons/icons8-transaction-96.png'),
+                                  child: Image.asset('assets/icons/${e}.png'),
                                 ),
                                 const SizedBox(
                                   width: 10,
@@ -102,7 +104,7 @@ class _ScreenAddIncomeState extends State<ScreenAddIncome> {
                               children: [
                                 SizedBox(
                                   width: 42,
-                                  child: Image.asset('assets/icons/icons8-transaction-96.png'),
+                                  child: Image.asset('assets/icons/${e}.png'),
                                 ),
                                 const SizedBox(
                                   width: 5,

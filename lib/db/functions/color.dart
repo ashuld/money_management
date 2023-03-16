@@ -15,6 +15,7 @@ List<String> expenseitem= [
     'Transportation',
     'Personal Care',
     'Loans',
+    'Medical',
     'Other Expenses'
   ];
 List<String> incomeitem=[
@@ -22,9 +23,5 @@ List<String> incomeitem=[
   'Other Income'
 ];
 
+var lengt = 0;
 
-
- List incomeimg = [
-  'assets/icons/icons8-banknotes-96.png',
-  'assets/icons/icons8-transaction-96.png'
-];

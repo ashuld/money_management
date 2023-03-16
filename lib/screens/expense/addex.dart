@@ -1,8 +1,13 @@
 // ignore_for_file: avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:money_management/db/functions/color.dart';
+import 'package:money_management/db/functions/db_functions.dart';
+import 'package:money_management/db/model/transactions.dart';
 import 'package:money_management/screens/expense/widgets/addexbackground.dart';
+import 'package:money_management/screens/home/widgets/homelist.dart';
+import 'package:money_management/widgets/bottomnavigation.dart';
 
 class ScreenAddExpense extends StatefulWidget {
   const ScreenAddExpense({super.key});
@@ -12,6 +17,7 @@ class ScreenAddExpense extends StatefulWidget {
 }
 
 class _ScreenAddExpenseState extends State<ScreenAddExpense> {
+  // final box = Hive.box<addExpense>('expensedb');
   DateTime date = DateTime.now();
   String? selectedItem;
   final TextEditingController expense = TextEditingController();
@@ -73,7 +79,7 @@ class _ScreenAddExpenseState extends State<ScreenAddExpense> {
                             color: unselected
                           )
                         ),
-                        child: DropdownButton<String>(
+                        child: DropdownButton(
                           value: selectedItem,
                           items: expenseitem.map((e) => DropdownMenuItem(
                             value: e,
@@ -82,11 +88,12 @@ class _ScreenAddExpenseState extends State<ScreenAddExpense> {
                                 children: [
                                   SizedBox(
                                     width: 40,
-                                    child: Image.asset('assets/icons/icons8-atm-card-96.png'),
+                                    child: Image.asset('assets/icons/$e.png')
                                   ),
                                   const SizedBox(
                                     width: 10,
                                   ),
+                                  
                                   Text(
                                     e,
                                     style: const TextStyle(
@@ -103,7 +110,7 @@ class _ScreenAddExpenseState extends State<ScreenAddExpense> {
                               children: [
                                 SizedBox(
                                   width: 42,
-                                  child: Image.asset('assets/icons/icons8-atm-card-96.png'),
+                                  child: Image.asset('assets/icons/${e}.png'),
                                 ),
                                 const SizedBox(
                                   width: 5,
@@ -133,7 +140,7 @@ class _ScreenAddExpenseState extends State<ScreenAddExpense> {
                       ),
                     ),
                     const SizedBox(
-                      height: 30,
+                      height: 20,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
@@ -171,7 +178,7 @@ class _ScreenAddExpenseState extends State<ScreenAddExpense> {
                       ),
                     ),
                     const SizedBox(
-                      height: 30,
+                      height: 20,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
@@ -210,7 +217,7 @@ class _ScreenAddExpenseState extends State<ScreenAddExpense> {
                       ),
                     ),
                     const SizedBox(
-                      height: 30,
+                      height: 20,
                     ),
                     Container(
                       alignment: Alignment.bottomLeft,
@@ -245,7 +252,7 @@ class _ScreenAddExpenseState extends State<ScreenAddExpense> {
                         ),
                     ),
                     const SizedBox(
-                      height: 30,
+                      height: 20,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
@@ -281,10 +288,13 @@ class _ScreenAddExpenseState extends State<ScreenAddExpense> {
                         ),
                       ),
                     ),
-                    const Spacer(),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     GestureDetector(
                       onTap: () {
-                        
+                        //print(selectedItem);
+                        onbuttonclick();
                       },
                       child: Container(
                         alignment: Alignment.center,
@@ -304,15 +314,45 @@ class _ScreenAddExpenseState extends State<ScreenAddExpense> {
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
-                    )
                   ],
                 ),
               ),
-            )
+            ),
           ],
-        ))
+        ),
+        
+        )
     );
+  }
+  Future<void> onbuttonclick() async {
+    final category = selectedItem;
+    final exp = expense.text;
+    final amo = double.parse(amount.text);
+    final datetim = date;
+    final no =note.text;
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor:prColor,
+          behavior: SnackBarBehavior.floating,
+          content: Text(
+            'Transaction added',
+            style: TextStyle(
+              fontStyle: FontStyle.italic, 
+              color: secColor),
+          )));
+          final expen = ExpenseModel(
+            category: category, 
+            amount: amo, 
+            datetime: datetim, 
+            expense: exp,
+            note: no
+            );
+
+            addexpense(expen);
+            // print(expen);
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => const BottomNavigation()
+            ));
+
   }
 }
