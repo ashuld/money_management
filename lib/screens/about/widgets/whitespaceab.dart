@@ -17,7 +17,7 @@ Widget spaceAbout(){
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [
-                        Text("Money Mate",
+                        Text("BudgetBuddy",
                         style: TextStyle(
                           color: prColor,
                           fontWeight: FontWeight.bold,

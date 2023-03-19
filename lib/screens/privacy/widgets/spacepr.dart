@@ -18,7 +18,7 @@ Widget spacePrivacy(){
                     child: ListView(
                       children: const [
                         Text("""
-                  PRIVACY POLICY FOR \n                        MONEYMATE
+                  PRIVACY POLICY FOR \n                        'BudgetBuddy'
 
 We are committed to protecting your privacy. This privacy policy sets out how we use and protect any information that you give us when you use our money management mobile app.
 

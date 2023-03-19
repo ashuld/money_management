@@ -13,7 +13,7 @@ class ScreenReport extends StatefulWidget {
 }
 
 class _ScreenReportState extends State<ScreenReport> {
-  List day = ['Week', 'Month', 'Year'];
+  List day = ['Day','Week', 'Month', 'Year'];
   int indexColor = 0;
   Map<String, double> dataMap = {
     "Entertainment": 60,
@@ -23,7 +23,7 @@ class _ScreenReportState extends State<ScreenReport> {
   @override
   Widget build(BuildContext context) {
     notify();
-    final box = Hive.box<ExpenseModel>(expensedb);
+    final box = Hive.box<TransactionModel>(transactiondb);
     return Scaffold(
       backgroundColor: Colors.indigo[50],
       body: SafeArea(
@@ -50,7 +50,7 @@ class _ScreenReportState extends State<ScreenReport> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ...List.generate(3, (index) {
+                      ...List.generate(4, (index) {
                         return GestureDetector(
                           onTap: () {
                             setState(() {
@@ -63,8 +63,8 @@ class _ScreenReportState extends State<ScreenReport> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: indexColor == index
-                                    ? const Color.fromARGB(255, 51, 60, 141)
-                                    : Colors.indigo[50]),
+                                    ? prColor
+                                    : secColor),
                             child: Center(
                               child: Text(
                                 day[index],
@@ -98,7 +98,7 @@ class _ScreenReportState extends State<ScreenReport> {
                         decoration: BoxDecoration(
                             border: Border.all(
                               width: 2,
-                              color: Color.fromARGB(255, 51, 60, 141),
+                              color: const Color.fromARGB(255, 51, 60, 141),
                             ),
                             borderRadius: BorderRadius.circular(8)),
                         child: Row(
@@ -172,10 +172,10 @@ class _ScreenReportState extends State<ScreenReport> {
           SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
               return ValueListenableBuilder(
-                valueListenable: expensenotifier,
-                builder: (BuildContext context, List<ExpenseModel> expenselist,
+                valueListenable: transactionnotifier,
+                builder: (BuildContext context, List<TransactionModel> transactionlist,
                     Widget? child) {
-                  final reportdata = expenselist[index];
+                  final reportdata = transactionlist[index];
                   return ListTile(
                     onTap: () {
                       showBottomSheet(
@@ -234,7 +234,7 @@ class _ScreenReportState extends State<ScreenReport> {
                                             color: secColor, fontSize: 15),
                                       ),
                                       Text(
-                                        reportdata.category!,
+                                        reportdata.category,
                                         style: const TextStyle(
                                             color: secColor, fontSize: 15),
                                       ),
@@ -255,7 +255,7 @@ class _ScreenReportState extends State<ScreenReport> {
                                             color: secColor, fontSize: 15),
                                       ),
                                       Text(
-                                        reportdata.expense,
+                                        reportdata.name,
                                         style: const TextStyle(
                                             color: secColor, fontSize: 15),
                                       ),
@@ -319,7 +319,7 @@ class _ScreenReportState extends State<ScreenReport> {
                                             color: secColor, fontSize: 15),
                                       ),
                                       Text(
-                                        reportdata.note!,
+                                        reportdata.note,
                                         style: const TextStyle(
                                             color: secColor, fontSize: 15),
                                       ),
@@ -337,7 +337,7 @@ class _ScreenReportState extends State<ScreenReport> {
                       height: 40,
                     ),
                     title: Text(
-                      reportdata.expense,
+                      reportdata.name,
                       style: const TextStyle(
                           color: Color.fromARGB(255, 51, 60, 141),
                           fontSize: 17,

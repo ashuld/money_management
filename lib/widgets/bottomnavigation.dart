@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:money_management/db/functions/color.dart';
+import 'package:money_management/screens/addtransaction/addtr.dart';
 import 'package:money_management/screens/home/home.dart';
 import 'package:money_management/screens/statistics/report.dart';
-import 'package:money_management/widgets/bottomsheet.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});
@@ -13,7 +13,7 @@ class BottomNavigation extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigation> {
   int indexColour = 0;
-  List screen = [ ScreenHome(),const ScreenReport()];
+  List screen = [ScreenHome(), const ScreenReport()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,39 +21,36 @@ class _BottomNavigationState extends State<BottomNavigation> {
       backgroundColor: secColor,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          showModalBottomSheet(
-            backgroundColor: prColor,
-            context: context, 
-            builder: (BuildContext ctx) {
-              return bottomSheet(ctx);
-            },);
-      },
-      backgroundColor: prColor,
-      child: const Icon(Icons.add,
-      color: secColor,
-      ),
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ScreenAddTransaction(),
+              ));
+        },
+        backgroundColor: prColor,
+        child: const Icon(
+          Icons.add,
+          color: secColor,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         child: Padding(
-          padding: const EdgeInsets.only(
-            top: 7.5,
-            bottom: 7.5
-          ),
+          padding: const EdgeInsets.only(top: 7.5, bottom: 7.5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children:  [
+            children: [
               GestureDetector(
                 onTap: () {
                   setState(() {
                     indexColour = 0;
                   });
                 },
-                child:  Icon(
+                child: Icon(
                   Icons.home,
                   size: 30,
-                  color: indexColour == 0 ? prColor:unselected,
+                  color: indexColour == 0 ? prColor : unselected,
                 ),
               ),
               const SizedBox(
@@ -65,10 +62,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
                     indexColour = 1;
                   });
                 },
-                child:  Icon(
+                child: Icon(
                   Icons.pie_chart_outline_outlined,
                   size: 30,
-                  color: indexColour == 1 ? prColor:unselected,
+                  color: indexColour == 1 ? prColor : unselected,
                 ),
               ),
             ],

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:money_management/db/functions/color.dart';
 
-Column AddInBackground(BuildContext context){
+Column addTransactionBackground(BuildContext context){
   return Column(
               children: [
                 Container(
                 width: double.infinity,
                 height: 240,
                 decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 51, 60, 141),
+                  color:prColor,
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(20),
                     bottomRight: Radius.circular(20)
@@ -30,21 +31,21 @@ Column AddInBackground(BuildContext context){
                             onTap: () {
                               Navigator.of(context).pop();
                             },
-                            child: Icon(
+                            child: const Icon(
                               Icons.arrow_back,
-                              color: Colors.indigo[50],
+                              color: secColor,
                               ),
                           ),
-                            Text(
-                              'Add Income',
+                            const Text(
+                              'Add Transaction',
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,
-                                color: Colors.indigo[50]
+                                color: secColor
                               ),
                               ),
-                              Icon(Icons.attach_file_outlined,
-                              color: Colors.indigo[50],
+                              const Icon(Icons.attach_file_outlined,
+                              color: secColor,
                               )
                         ],
                       ),
