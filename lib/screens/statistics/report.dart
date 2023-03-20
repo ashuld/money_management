@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:money_management/db/functions/color.dart';
+import 'package:money_management/db/constants/color.dart';
 import 'package:money_management/db/functions/db_functions.dart';
 import 'package:money_management/db/model/transactions.dart';
 import 'package:pie_chart/pie_chart.dart';
@@ -154,14 +154,14 @@ class _ScreenReportState extends State<ScreenReport> {
                       Text(
                         'Top Spendings',
                         style: TextStyle(
-                            color: Color.fromARGB(255, 51, 60, 141),
+                            color: prColor,
                             fontSize: 16,
                             fontWeight: FontWeight.bold),
                       ),
                       Icon(
                         Icons.swap_vert,
                         size: 25,
-                        color: Color.fromARGB(255, 51, 60, 141),
+                        color: prColor,
                       )
                     ],
                   ),
@@ -176,6 +176,47 @@ class _ScreenReportState extends State<ScreenReport> {
                 builder: (BuildContext context, List<TransactionModel> transactionlist,
                     Widget? child) {
                   final reportdata = transactionlist[index];
+                  String mon;
+                  switch (reportdata.datetime.month.toString()) {
+        case '1':
+          mon = 'Jan';
+          break;
+        case '2':
+          mon = 'Feb';
+          break;
+        case '3':
+          mon = "Mar";
+          break;
+        case '4':
+          mon = 'Apr';
+          break;
+        case '5':
+          mon = 'May';
+          break;
+        case '6':
+          mon = 'Jun';
+          break;
+        case '7':
+          mon = 'Jul';
+          break;
+        case '8':
+          mon = 'Aug';
+          break;
+        case '9':
+          mon = 'Sep';
+          break;
+        case '10':
+          mon = 'Oct';
+          break;
+        case '11':
+          mon = 'Nov';
+          break;
+        case '12':
+          mon = 'Dec';
+          break;
+        default:
+          return const Text('data');
+      }
                   return ListTile(
                     onTap: () {
                       showBottomSheet(
@@ -339,19 +380,19 @@ class _ScreenReportState extends State<ScreenReport> {
                     title: Text(
                       reportdata.name,
                       style: const TextStyle(
-                          color: Color.fromARGB(255, 51, 60, 141),
+                          color: prColor,
                           fontSize: 17,
                           fontWeight: FontWeight.w600),
                     ),
                     subtitle: Text(
-                      '${reportdata.datetime.day}/${reportdata.datetime.month}/${reportdata.datetime.day}',
+                      '$mon-${reportdata.datetime.day}/${reportdata.datetime.year}',
                       style: const TextStyle(
                           color: Colors.grey, fontWeight: FontWeight.w600),
                     ),
                     trailing: Text(
                       reportdata.amount.toString(),
-                      style: const TextStyle(
-                          color: expensecol,
+                      style:  TextStyle(
+                          color: reportdata.type == 'Income'?incomecol:expensecol,
                           fontSize: 20,
                           fontWeight: FontWeight.w600),
                     ),

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:money_management/db/functions/color.dart';
+import 'package:money_management/db/constants/color.dart';
 import 'package:money_management/db/functions/db_functions.dart';
-import 'package:money_management/db/model/transactions.dart';
 import 'package:money_management/screens/about/about.dart';
 import 'package:money_management/screens/privacy/privacy.dart';
 import 'package:money_management/screens/splash/splash.dart';
@@ -63,7 +61,7 @@ Widget settingsTiles(context) {
                       TextButton(
                         onPressed: () {
                           reset();
-                          getalltransaction();
+                          refreshTransaction();
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(

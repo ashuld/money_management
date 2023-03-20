@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:money_management/db/functions/color.dart';
+import 'package:money_management/db/constants/color.dart';
 import 'package:money_management/screens/settings/widgets/settingsbackground.dart';
 import 'package:money_management/screens/settings/widgets/settingstiles.dart';
 

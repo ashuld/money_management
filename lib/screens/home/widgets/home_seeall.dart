@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:money_management/db/functions/color.dart';
+import 'package:money_management/db/constants/color.dart';
 import 'package:money_management/screens/transactions/all.dart';
 
 Widget homeSeeall(BuildContext context){
@@ -11,7 +11,7 @@ Widget homeSeeall(BuildContext context){
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children:  [
-                      const Text('Transactions History',
+                      const Text('Recent Transactions',
                       style: TextStyle(
                         color:  prColor,
                         fontSize: 17,

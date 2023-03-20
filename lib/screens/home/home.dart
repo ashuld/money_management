@@ -3,16 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:money_management/db/functions/calculations.dart';
-import 'package:money_management/db/functions/color.dart';
+import 'package:money_management/db/constants/color.dart';
 import 'package:money_management/db/functions/db_functions.dart';
 import 'package:money_management/db/model/transactions.dart';
 import 'package:money_management/db/model/userdata.dart';
 import 'package:money_management/screens/home/widgets/home_seeall.dart';
 import 'package:money_management/screens/home/widgets/homelist.dart';
 import 'package:money_management/screens/login/login.dart';
-import 'package:money_management/screens/register/create.dart';
 import 'package:money_management/screens/settings/settings.dart';
-import 'package:money_management/screens/splash/splash.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ScreenHome extends StatefulWidget {
@@ -29,7 +27,6 @@ class _ScreenHomeState extends State<ScreenHome> {
   final GlobalKey<ScaffoldState> key_ = GlobalKey();
   @override
   Widget build(BuildContext context) {
-    // notify();
     notify();
     final box = Hive.box<TransactionModel>(transactiondb);
     return SafeArea(
@@ -384,7 +381,7 @@ class _ScreenHomeState extends State<ScreenHome> {
               SliverList(
                 delegate: SliverChildBuilderDelegate((context, index) {
                   return homeList(context, index);
-                }, childCount: box.length),
+                }, childCount: box.length >= 4 ? 4 : box.length),
               )
             ],
           ),

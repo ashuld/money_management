@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:money_management/db/functions/color.dart';
+import 'package:money_management/db/constants/color.dart';
 import 'package:money_management/db/functions/db_functions.dart';
 import 'package:money_management/db/model/userdata.dart';
 import 'package:money_management/screens/register/create.dart';
@@ -14,8 +14,8 @@ class ScreenLogIn extends StatefulWidget {
 }
 
 class _ScreenLogInState extends State<ScreenLogIn> {
-  var userid;
-  var pasword;
+  late String userid;
+  late String pasword;
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController pinController = TextEditingController();
   FocusNode usernameController_ = FocusNode();
@@ -154,7 +154,7 @@ class _ScreenLogInState extends State<ScreenLogIn> {
                               // ignore: use_build_context_synchronously
                               Navigator.pushAndRemoveUntil(context, 
                               MaterialPageRoute(
-                                builder: (context) => BottomNavigation(),
+                                builder: (context) => const BottomNavigation(),
                                 ), 
                                 (route) => false);
                             } else {

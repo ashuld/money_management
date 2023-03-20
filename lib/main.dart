@@ -15,8 +15,9 @@ Future<void> main() async {
   if (!Hive.isAdapterRegistered(UserModelAdapter().typeId)) {
     Hive.registerAdapter(UserModelAdapter());
   }
-   await Hive.openBox<TransactionModel>(transactiondb);
-   await Hive.openBox<UserModel>(userdb);
+  await Hive.openBox<TransactionModel>(transactiondb);
+  await Hive.openBox<UserModel>(userdb);
+  notify();
   runApp(const MyApp());
 }
 

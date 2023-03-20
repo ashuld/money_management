@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:money_management/db/functions/calculations.dart';
-import 'package:money_management/db/functions/color.dart';
+import 'package:money_management/db/constants/color.dart';
+import 'package:money_management/screens/search/search.dart';
 
 Widget transactionHead(BuildContext ctx) {
   return Stack(
@@ -62,23 +62,31 @@ Widget transactionHead(BuildContext ctx) {
         top: 75,
         left: 15,
         right: 15,
-        child: Container(
-          height: 50,
-          decoration: BoxDecoration(color: secColor, borderRadius: BorderRadius.circular(15)),
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Row(
-              children: const [
-                Text('Search',
-                style: TextStyle(
+        child: InkWell(
+          onTap: () {
+            showSearch(context: ctx, delegate: ScreenSearch());
+          },
+          child: Container(
+            height: 50,
+            decoration: BoxDecoration(color: secColor, borderRadius: BorderRadius.circular(15)),
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text('Search',
+                  style: TextStyle(
+                    color: prColor,
+                    fontWeight: FontWeight.bold
+                  ),
+                  ),
+                  Icon(Icons.search,
                   color: prColor,
-                  fontWeight: FontWeight.bold
-                ),
-                ),
-                
-              ],
-            ),
-          )
+                  )
+                ],
+              ),
+            )
+          ),
         ),
       )
     ],

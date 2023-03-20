@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:money_management/db/functions/color.dart';
+import 'package:money_management/db/constants/color.dart';
 
 Column settingsBackground(BuildContext context){
   return Column(

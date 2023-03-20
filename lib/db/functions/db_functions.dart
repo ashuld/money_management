@@ -1,6 +1,4 @@
-
 // ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member, prefer_const_declarations
-
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:money_management/db/model/transactions.dart';
@@ -8,8 +6,9 @@ import 'package:money_management/db/model/userdata.dart';
 
 ValueNotifier<List<TransactionModel>> transactionnotifier = ValueNotifier([]);
 ValueNotifier<List<UserModel>> usernotifier = ValueNotifier([]);
+ValueNotifier<List<TransactionModel>> transactionfilternotifier = ValueNotifier([]);
 
-//expense functions
+//transaction functions
 final transactiondb = 'expense';
 Future<void> addtransaction(TransactionModel value) async {
   final transactionData = await Hive.openBox<TransactionModel>(transactiondb);
@@ -19,11 +18,17 @@ Future<void> addtransaction(TransactionModel value) async {
   transactionnotifier.notifyListeners();
 }
 
-Future<void> getalltransaction() async {
-  final expenseData = await Hive.openBox<TransactionModel>(transactiondb);
-  transactionnotifier.value.clear();
-  transactionnotifier.value.addAll(expenseData.values);
-  transactionnotifier.notifyListeners();
+Future<List<TransactionModel>> getalltransaction() async {
+  final transactionData = await Hive.openBox<TransactionModel>(transactiondb);
+  return transactionData.values.toList();
+}
+
+Future<void>refreshTransaction() async{
+final translist = await getalltransaction();
+translist.sort((first, second) => second.datetime.compareTo(first.datetime));
+transactionnotifier.value.clear();
+transactionnotifier.value.addAll(translist);
+transactionnotifier.notifyListeners();
 }
 
 //userfunctions
@@ -46,10 +51,10 @@ Future<void> getalluser() async {
 Future<void> reset() async {
   final resetbox = Hive.box<TransactionModel>(transactiondb);
   resetbox.clear();
-  getalltransaction();
+  refreshTransaction();
 }
 
 Future<void> notify() async {
-  await getalltransaction();
+  await refreshTransaction();
   await getalluser();
 }

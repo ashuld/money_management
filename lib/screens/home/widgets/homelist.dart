@@ -1,13 +1,10 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:money_management/db/functions/calculations.dart';
-import 'package:money_management/db/functions/color.dart';
+import 'package:money_management/db/constants/color.dart';
 import 'package:money_management/db/functions/db_functions.dart';
 import 'package:money_management/db/model/transactions.dart';
 
 Widget homeList(BuildContext context, index) {
-  getalltransaction();
+  refreshTransaction();
   dynamic mon;
   return ValueListenableBuilder(
     valueListenable: transactionnotifier,
@@ -16,8 +13,7 @@ Widget homeList(BuildContext context, index) {
       if (transactionlist.isEmpty) {
         return Container();
       }
-      final rawdata = transactionlist.reversed.toList();
-      final data = rawdata[index];
+      final data = transactionlist[index];
       switch (data.datetime.month.toString()) {
         case '1':
           mon = 'Jan';

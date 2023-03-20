@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:money_management/db/functions/color.dart';
+import 'package:money_management/db/constants/color.dart';
 import 'package:money_management/db/functions/db_functions.dart';
-import 'package:money_management/db/model/transactions.dart';
 import 'package:money_management/db/model/userdata.dart';
 import 'package:money_management/screens/login/login.dart';
 import 'package:money_management/widgets/bottomnavigation.dart';

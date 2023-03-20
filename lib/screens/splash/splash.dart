@@ -1,8 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:money_management/db/functions/color.dart';
-import 'package:money_management/screens/login/login.dart';
+import 'package:money_management/db/constants/color.dart';
 import 'package:money_management/screens/register/create.dart';
 import 'package:money_management/widgets/bottomnavigation.dart';
 import 'package:shared_preferences/shared_preferences.dart';

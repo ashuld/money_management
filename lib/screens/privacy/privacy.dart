@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:money_management/db/functions/color.dart';
-import 'package:money_management/screens/about/widgets/aboutbg.dart';
-import 'package:money_management/screens/about/widgets/whitespaceab.dart';
+import 'package:money_management/db/constants/color.dart';
 import 'package:money_management/screens/privacy/widgets/privacybg.dart';
 import 'package:money_management/screens/privacy/widgets/spacepr.dart';
 

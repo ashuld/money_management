@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:money_management/db/functions/color.dart';
+import 'package:money_management/db/constants/color.dart';
 import 'package:money_management/screens/addtransaction/addtr.dart';
 import 'package:money_management/screens/home/home.dart';
 import 'package:money_management/screens/statistics/report.dart';
@@ -13,7 +13,7 @@ class BottomNavigation extends StatefulWidget {
 
 class _BottomNavigationState extends State<BottomNavigation> {
   int indexColour = 0;
-  List screen = [ScreenHome(), const ScreenReport()];
+  List screen = [const ScreenHome(), const ScreenReport()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
