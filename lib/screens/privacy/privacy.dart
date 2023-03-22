@@ -16,8 +16,8 @@ class ScreenPrivacy extends StatelessWidget {
           children: [
             privacyBackground(context),
             Positioned(
-              top: 120,
-              child: spacePrivacy()
+              top: MediaQuery.of(context).size.height * .15,
+              child: spacePrivacy(context)
               )
           ],
         )

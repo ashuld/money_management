@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 part 'transactions.g.dart';
 
 @HiveType(typeId: 1)
-class TransactionModel extends HiveObject{
+class TransactionModel extends HiveObject {
   @HiveField(0)
   int? id;
   @HiveField(1)

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:money_management/db/constants/color.dart';
 
-Widget spaceTerms(){
+Widget spaceTerms(context){
   return Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: plain,
                 ),
-                height: 550,
-                width: 340,
+                height: MediaQuery.of(context).size.height * .68,
+                width: MediaQuery.of(context).size.width * 0.9,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SizedBox(

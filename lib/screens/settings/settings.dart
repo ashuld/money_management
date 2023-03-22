@@ -21,7 +21,7 @@ class _ScreenSettingsState extends State<ScreenSettings> {
           children: [
             settingsBackground(context),
             Positioned(
-              top: 120,
+              top: MediaQuery.of(context).size.height * .15,
               child: settingsTiles(context)
               )
           ],

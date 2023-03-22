@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:money_management/db/constants/color.dart';
 import 'package:money_management/screens/register/create.dart';
 import 'package:money_management/widgets/bottomnavigation.dart';
+import 'package:money_management/widgets/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ScreenSplash extends StatefulWidget {
@@ -11,12 +12,14 @@ class ScreenSplash extends StatefulWidget {
   @override
   State<ScreenSplash> createState() => _ScreenSplashState();
 }
+
 class _ScreenSplashState extends State<ScreenSplash> {
   @override
   void initState() {
     super.initState();
     navigateToHome(context);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,12 +41,10 @@ class _ScreenSplashState extends State<ScreenSplash> {
                       fit: BoxFit.fill)),
             ),
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          box30(),
           DefaultTextStyle(
             style: const TextStyle(
-                color: secColor, fontSize: 25.0, fontWeight: FontWeight.bold),
+                color: secColor, fontSize: 25.0, fontWeight: bold),
             child: AnimatedTextKit(
               animatedTexts: [WavyAnimatedText('BudgetBuddy')],
               isRepeatingAnimation: true,
@@ -54,7 +55,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
     ));
   }
 
- void  navigateToHome(BuildContext context) async {
+  void navigateToHome(BuildContext context) async {
     var prefs = await SharedPreferences.getInstance();
     var loggedIn = prefs.getBool('isLogged');
     await Future.delayed(const Duration(milliseconds: 3500));

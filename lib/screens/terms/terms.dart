@@ -16,8 +16,8 @@ class ScreenTerms extends StatelessWidget {
           children: [
             termsBackground(context),
             Positioned(
-              top: 120,
-              child: spaceTerms()
+              top: MediaQuery.of(context).size.height * .15,
+              child: spaceTerms(context)
               )
           ],
         )

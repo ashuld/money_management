@@ -23,12 +23,12 @@ Future<List<TransactionModel>> getalltransaction() async {
   return transactionData.values.toList();
 }
 
-Future<void>refreshTransaction() async{
-final translist = await getalltransaction();
-translist.sort((first, second) => second.datetime.compareTo(first.datetime));
-transactionnotifier.value.clear();
-transactionnotifier.value.addAll(translist);
-transactionnotifier.notifyListeners();
+Future<void> refreshTransaction() async {
+  final translist = await getalltransaction();
+  translist.sort((first, second) => second.datetime.compareTo(first.datetime));
+  transactionnotifier.value.clear();
+  transactionnotifier.value.addAll(translist);
+  transactionnotifier.notifyListeners();
 }
 
 //userfunctions
@@ -48,12 +48,14 @@ Future<void> getalluser() async {
   usernotifier.notifyListeners();
 }
 
+//data reset
 Future<void> reset() async {
   final resetbox = Hive.box<TransactionModel>(transactiondb);
   resetbox.clear();
   refreshTransaction();
 }
 
+//reading database values
 Future<void> notify() async {
   await refreshTransaction();
   await getalluser();

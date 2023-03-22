@@ -3,6 +3,7 @@ import 'package:money_management/db/constants/color.dart';
 import 'package:money_management/screens/addtransaction/addtr.dart';
 import 'package:money_management/screens/home/home.dart';
 import 'package:money_management/screens/statistics/report.dart';
+import 'package:money_management/widgets/widgets.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});
@@ -20,19 +21,15 @@ class _BottomNavigationState extends State<BottomNavigation> {
       body: screen[indexColour],
       backgroundColor: secColor,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const ScreenAddTransaction(),
-              ));
-        },
-        backgroundColor: prColor,
-        child: const Icon(
-          Icons.add,
-          color: secColor,
-        ),
-      ),
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ScreenAddTransaction(),
+                ));
+          },
+          backgroundColor: prColor,
+          child: secIcon(icon: Icons.add)),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
@@ -42,32 +39,26 @@ class _BottomNavigationState extends State<BottomNavigation> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               GestureDetector(
-                onTap: () {
-                  setState(() {
-                    indexColour = 0;
-                  });
-                },
-                child: Icon(
-                  Icons.home,
-                  size: 30,
-                  color: indexColour == 0 ? prColor : unselected,
-                ),
-              ),
-              const SizedBox(
-                width: 40,
-              ),
+                  onTap: () {
+                    setState(() {
+                      indexColour = 0;
+                    });
+                  },
+                  child: customIcon(
+                      icon: Icons.home,
+                      size: 30.0,
+                      color: indexColour == 0 ? prColor : unselected)),
+              customBox(width: 40.0),
               GestureDetector(
-                onTap: () {
-                  setState(() {
-                    indexColour = 1;
-                  });
-                },
-                child: Icon(
-                  Icons.pie_chart_outline_outlined,
-                  size: 30,
-                  color: indexColour == 1 ? prColor : unselected,
-                ),
-              ),
+                  onTap: () {
+                    setState(() {
+                      indexColour = 1;
+                    });
+                  },
+                  child: customIcon(
+                      color: indexColour == 1 ? prColor : unselected,
+                      icon: Icons.pie_chart_outline_outlined,
+                      size: 30.0)),
             ],
           ),
         ),

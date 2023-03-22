@@ -1,40 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:money_management/db/constants/color.dart';
 import 'package:money_management/screens/transactions/all.dart';
+import 'package:money_management/widgets/widgets.dart';
 
-Widget homeSeeall(BuildContext context){
+Widget homeSeeall(BuildContext context) {
   return Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 15,
-                    
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children:  [
-                      const Text('Recent Transactions',
-                      style: TextStyle(
-                        color:  prColor,
-                        fontSize: 17,
-                        fontWeight: FontWeight.w600
-                      ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context, 
-                            MaterialPageRoute(
-                              builder: (context) => const ScreenTransactions(),)
-                            );
-                        },
-                        child: const Text('See All',
-                        style: TextStyle(
-                          color:  unselected,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600
-                        ),
-                        ),
-                      )
-                    ],
-                  ),
-                );
+    padding: const EdgeInsets.symmetric(
+      horizontal: 15,
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        prText600(data: 'Recent Transactions', size: 17.0),
+        GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ScreenTransactions(),
+                  ));
+            },
+            child: customText(data: 'See All', color: unselected, size: 13.0))
+      ],
+    ),
+  );
 }
