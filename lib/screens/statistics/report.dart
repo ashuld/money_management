@@ -5,7 +5,6 @@ import 'package:money_management/db/constants/itemlist.dart';
 import 'package:money_management/db/functions/db_functions.dart';
 import 'package:money_management/db/model/transactions.dart';
 import 'package:money_management/screens/statistics/widgets/reportcontents.dart';
-import 'package:money_management/widgets/bottomsheet.dart';
 import 'package:money_management/widgets/widgets.dart';
 
 class ScreenReport extends StatefulWidget {
@@ -46,19 +45,7 @@ class _ScreenReportState extends State<ScreenReport> {
                         List<TransactionModel> transactionlist, Widget? child) {
                       final reportdata = transactionlist[index];
                       return ListTile(
-                          onTap: () {
-                            bottomSheet(context, reportdata);
-                          },
-                          leading: Image.asset(
-                            'assets/icons/${reportdata.category}.png',
-                            height: 40,
-                          ),
                           title: prText600(data: reportdata.name, size: 17.0),
-                          subtitle: Text(
-                            '${mon[reportdata.datetime.month - 1]}-${reportdata.datetime.day}/${reportdata.datetime.year}',
-                            style: const TextStyle(
-                                color: unselected, fontWeight: FontWeight.w600),
-                          ),
                           trailing: Text(
                             '₹ ${reportdata.amount.toString()}',
                             style: TextStyle(

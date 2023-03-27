@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:money_management/db/constants/color.dart';
 import 'package:money_management/db/functions/db_functions.dart';
+import 'package:money_management/db/functions/piechartcal.dart';
 import 'package:money_management/widgets/widgets.dart';
 import 'package:pie_chart/pie_chart.dart';
 
@@ -8,36 +9,55 @@ Widget pieChart(context, dataMap) {
   return ValueListenableBuilder(
     valueListenable: transactionnotifier,
     builder: (context, value, child) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5),
-        child: Column(
-          children: [
-            PieChart(
-              dataMap: dataMap,
-              chartRadius: MediaQuery.of(context).size.width * 0.8,
-              colorList: const [
-                food,
-                entertainment,
-                education,
-                transportation,
-                personalcare,
-                loans,
-                medical,
-                otherexpense,
-              ],
-              legendOptions: const LegendOptions(
-                  showLegendsInRow: true,
-                  legendTextStyle: TextStyle(
-                      color: prColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
-                  legendPosition: LegendPosition.bottom),
-              chartValuesOptions:
-                  const ChartValuesOptions(showChartValuesInPercentage: true),
+      var total = foodtotal() +
+          entertainmenttotal() +
+          educationtotal() +
+          otherexpensestotal() +
+          transportationtotal() +
+          personalcaretotal() +
+          loanstotal() +
+          medicaltotal();
+      return total == 0
+          ? Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: Column(
+                children: const [
+                  SizedBox(
+                      child: Text('No Data',
+                          style: TextStyle(fontSize: 20, color: prColor))),
+                ],
+              ),
             )
-          ],
-        ),
-      );
+          : Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: Column(
+                children: [
+                  PieChart(
+                    dataMap: dataMap,
+                    chartRadius: MediaQuery.of(context).size.width * 0.8,
+                    colorList: const [
+                      food,
+                      entertainment,
+                      education,
+                      transportation,
+                      personalcare,
+                      loans,
+                      medical,
+                      otherexpense,
+                    ],
+                    legendOptions: const LegendOptions(
+                        showLegendsInRow: true,
+                        legendTextStyle: TextStyle(
+                            color: prColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16),
+                        legendPosition: LegendPosition.bottom),
+                    chartValuesOptions: const ChartValuesOptions(
+                        showChartValuesInPercentage: true),
+                  )
+                ],
+              ),
+            );
     },
   );
 }
