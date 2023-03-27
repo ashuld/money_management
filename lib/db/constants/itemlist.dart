@@ -31,6 +31,7 @@ List<String> mon = [
   'Dec'
 ];
 
+
 Map<String, double> dataMap = {
     "Food": foodtotal(),
     "Entertainment": entertainmenttotal(),

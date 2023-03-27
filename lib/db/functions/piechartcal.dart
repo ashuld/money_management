@@ -92,3 +92,14 @@ double otherexpensestotal() {
   total = a.reduce((value, element) => value + element);
   return total;
 }
+
+refresher(){
+  otherexpensestotal();
+  foodtotal();
+  entertainmenttotal();
+  medicaltotal();
+  educationtotal();
+  transportationtotal();
+  personalcaretotal();
+  loanstotal();
+}

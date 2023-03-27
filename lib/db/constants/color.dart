@@ -12,14 +12,14 @@ const def = FontWeight.w400;
 const th500 = FontWeight.w500;
 const th600 = FontWeight.w600;
 
-//colors for chart
-const food = Color.fromARGB(255, 244, 67, 54);
-const entertainment = Color.fromARGB(255, 129, 128, 128);
-const education= Color.fromARGB(255, 247, 229, 73);
-const transportation = Color.fromARGB(255, 96, 125, 139);
-const personalcare = Color.fromARGB(255, 56, 104, 117);
-const loans = Color.fromARGB(255, 33, 150, 243);
-const medical = Color.fromARGB(255, 121, 85, 72);
-const otherexpense = Color.fromARGB(255, 255, 64, 129);
-const salary = Color.fromARGB(255, 76, 175, 80);
-const otherincome= Color.fromARGB(255, 139, 195, 74);
+
+List<Color> chartcolor = const [
+  Color.fromARGB(255, 244, 67, 54),
+  Color.fromARGB(255, 129, 128, 128),
+  Color.fromARGB(255, 247, 229, 73),
+  Color.fromARGB(255, 96, 125, 139),
+  Color.fromARGB(255, 56, 104, 117),
+  Color.fromARGB(255, 33, 150, 243),
+  Color.fromARGB(255, 121, 85, 72),
+  Color.fromARGB(255, 255, 64, 129),
+];

@@ -8,7 +8,6 @@ ValueNotifier<List<TransactionModel>> transactionnotifier = ValueNotifier([]);
 ValueNotifier<List<UserModel>> usernotifier = ValueNotifier([]);
 ValueNotifier<List<TransactionModel>> transactionfilternotifier =
     ValueNotifier([]);
-ValueNotifier<List<TransactionModel>> chartlistnotifier = ValueNotifier([]);
 
 //transaction functions
 final transactiondb = 'expense';

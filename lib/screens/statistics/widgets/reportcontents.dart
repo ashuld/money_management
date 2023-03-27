@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:money_management/db/constants/color.dart';
 import 'package:money_management/db/functions/db_functions.dart';
 import 'package:money_management/db/functions/piechartcal.dart';
-import 'package:money_management/widgets/widgets.dart';
+import 'package:money_management/db/model/transactions.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 Widget pieChart(context, dataMap) {
   return ValueListenableBuilder(
     valueListenable: transactionnotifier,
-    builder: (context, value, child) {
+    builder: (context, List<TransactionModel> value, child) {
+      refreshTransaction();
       var total = foodtotal() +
           entertainmenttotal() +
           educationtotal() +
@@ -33,18 +34,13 @@ Widget pieChart(context, dataMap) {
               child: Column(
                 children: [
                   PieChart(
+                    chartType: ChartType.ring,
                     dataMap: dataMap,
+                    chartLegendSpacing: 40,
+                    ringStrokeWidth: 40,
                     chartRadius: MediaQuery.of(context).size.width * 0.8,
-                    colorList: const [
-                      food,
-                      entertainment,
-                      education,
-                      transportation,
-                      personalcare,
-                      loans,
-                      medical,
-                      otherexpense,
-                    ],
+                    colorList: chartcolor,
+                    centerText: 'Expense',
                     legendOptions: const LegendOptions(
                         showLegendsInRow: true,
                         legendTextStyle: TextStyle(
@@ -53,26 +49,19 @@ Widget pieChart(context, dataMap) {
                             fontSize: 16),
                         legendPosition: LegendPosition.bottom),
                     chartValuesOptions: const ChartValuesOptions(
-                        showChartValuesInPercentage: true),
+                        showChartValueBackground: false,
+                        showChartValues: true,
+                        decimalPlaces: 1,
+                        showChartValuesOutside: false,
+                        chartValueBackgroundColor: secColor,
+                        chartValueStyle: TextStyle(
+                            color: prColor,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold)),
                   )
                 ],
               ),
             );
     },
-  );
-}
-
-Widget spending() {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 15),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        const Text('Top Spendings',
-            style: TextStyle(
-                color: prColor, fontSize: 16, fontWeight: FontWeight.bold)),
-        prIcon(icon: Icons.swap_vert, size: 25.0)
-      ],
-    ),
   );
 }

@@ -20,7 +20,7 @@ class WidgetSearchCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(15), color: prColor),
         height: 75,
         child: Padding(
-          padding: const EdgeInsets.only(top: 10),
+          padding: const EdgeInsets.only(top: 0),
           child: ListTile(
               onTap: () {
                 bottomSheet(context, modelObj);
