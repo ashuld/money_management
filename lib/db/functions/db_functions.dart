@@ -6,16 +6,15 @@ import 'package:money_management/db/model/userdata.dart';
 
 ValueNotifier<List<TransactionModel>> transactionnotifier = ValueNotifier([]);
 ValueNotifier<List<UserModel>> usernotifier = ValueNotifier([]);
-ValueNotifier<List<TransactionModel>> transactionfilternotifier = ValueNotifier([]);
+ValueNotifier<List<TransactionModel>> transactionfilternotifier =
+    ValueNotifier([]);
 
 //transaction functions
 final transactiondb = 'expense';
 Future<void> addtransaction(TransactionModel value) async {
   final transactionData = await Hive.openBox<TransactionModel>(transactiondb);
-  final id = await transactionData.add(value);
-  value.id = id;
-  transactionnotifier.value.add(value);
-  transactionnotifier.notifyListeners();
+  await transactionData.put(value.id, value);
+  refreshTransaction();
 }
 
 Future<List<TransactionModel>> getalltransaction() async {
@@ -31,14 +30,26 @@ Future<void> refreshTransaction() async {
   transactionnotifier.notifyListeners();
 }
 
+Future<void> deleteTransaction(String transId) async {
+  final transactionData = await Hive.openBox<TransactionModel>(transactiondb);
+  await transactionData.delete(transId);
+  await refreshTransaction();
+  refreshTransaction();
+}
+
+Future<void> editTransaction(TransactionModel obj) async {
+  final transactionDB = await Hive.openBox<TransactionModel>(transactiondb);
+  transactionDB.put(obj.id, obj);
+  refreshTransaction();
+  notify();
+}
+
 //userfunctions
 final userdb = 'User';
 Future<void> adduser(UserModel value) async {
-  final userData = await Hive.openBox<UserModel>(userdb);
-  final id = await userData.add(value);
-  value.id = id;
-  usernotifier.value.add(value);
-  usernotifier.notifyListeners();
+  final transactionData = await Hive.openBox<UserModel>(userdb);
+  await transactionData.put(value.id, value);
+  getalluser();
 }
 
 Future<void> getalluser() async {
@@ -46,6 +57,13 @@ Future<void> getalluser() async {
   usernotifier.value.clear();
   usernotifier.value.addAll(userData.values);
   usernotifier.notifyListeners();
+}
+
+Future<void> edituser(UserModel value) async {
+  final transactionDB = await Hive.openBox<UserModel>(userdb);
+  transactionDB.put(value.id, value);
+  getalluser();
+  notify();
 }
 
 //data reset

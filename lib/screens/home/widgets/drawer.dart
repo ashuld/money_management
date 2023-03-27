@@ -48,14 +48,14 @@ Widget tile1(context) {
       });
 }
 
-Widget tile2(context) {
+Widget tile2(context, userlist) {
   return ListTile(
       leading: prIcon(icon: Icons.settings),
       title: prText500(data: 'Settings', size: 18.0),
       onTap: () {
         Navigator.pop(context);
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const ScreenSettings(),
+          builder: (context) =>   ScreenSettings(userdatalist: userlist),
         ));
       });
 }

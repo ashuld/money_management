@@ -5,7 +5,7 @@ part 'transactions.g.dart';
 @HiveType(typeId: 1)
 class TransactionModel extends HiveObject {
   @HiveField(0)
-  int? id;
+  String? id;
   @HiveField(1)
   String type;
   @HiveField(2)
@@ -25,5 +25,5 @@ class TransactionModel extends HiveObject {
       required this.amount,
       required this.datetime,
       required this.note,
-      this.id});
+      required this.id});
 }

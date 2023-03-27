@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:money_management/db/constants/color.dart';
+import 'package:money_management/db/constants/deletepopup.dart';
+import 'package:money_management/screens/edittransaction/edittransaction.dart';
 import 'package:money_management/widgets/widgets.dart';
 
 PersistentBottomSheetController bottomSheet(context, data) {
@@ -25,9 +27,24 @@ PersistentBottomSheetController bottomSheet(context, data) {
                       icon: secIcon(icon: Icons.close)),
                   Row(
                     children: [
-                      customIcon(icon: Icons.edit, color: Colors.blueAccent),
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>  EditTransaction(transactionlist: data),
+                                ));
+                          },
+                          child: customIcon(
+                              icon: Icons.edit, color: Colors.blueAccent)),
                       customBox(width: 10.0),
-                      customIcon(icon: Icons.delete, color: expensecol),
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                            alertMessage(context, id: data.id.toString());
+                          },
+                          child: customIcon(
+                              icon: Icons.delete, color: expensecol)),
                     ],
                   ),
                 ],
@@ -35,12 +52,10 @@ PersistentBottomSheetController bottomSheet(context, data) {
             ),
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Row(
-                  children: [
-                    secText400(data: 'Category      :  '),
-                    secText400(data: data.category)
-                  ],
-                )),
+                child: Row(children: [
+                  secText400(data: 'Category      :  '),
+                  secText400(data: data.category)
+                ])),
             box15(),
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -53,26 +68,22 @@ PersistentBottomSheetController bottomSheet(context, data) {
             box15(),
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Row(
-                  children: [
-                    secText400(data: 'Amount       :  '),
-                    customText(
-                        data: '₹  ${data.amount.toString()}',
-                        color: data.type == 'Income' ? incomecol : expensecol,
-                        size: 15.0)
-                  ],
-                )),
+                child: Row(children: [
+                  secText400(data: 'Amount       :  '),
+                  customText(
+                      data: '₹  ${data.amount.toString()}',
+                      color: data.type == 'Income' ? incomecol : expensecol,
+                      size: 15.0)
+                ])),
             box15(),
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Row(
-                  children: [
-                    secText400(data: 'Date           :  '),
-                    secText400(
-                        data:
-                            '${data.datetime.hour}:${data.datetime.minute}:${data.datetime.second} ${data.datetime.day}-${data.datetime.month}-${data.datetime.year}')
-                  ],
-                )),
+                child: Row(children: [
+                  secText400(data: 'Date           :  '),
+                  secText400(
+                      data:
+                          '${data.datetime.hour}:${data.datetime.minute}:${data.datetime.second} ${data.datetime.day}-${data.datetime.month}-${data.datetime.year}')
+                ])),
             box15(),
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),

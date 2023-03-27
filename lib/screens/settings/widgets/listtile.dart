@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:money_management/db/constants/color.dart';
 import 'package:money_management/db/functions/db_functions.dart';
+import 'package:money_management/db/model/userdata.dart';
 import 'package:money_management/screens/about/about.dart';
+import 'package:money_management/screens/edituser/edituser.dart';
 import 'package:money_management/screens/privacy/privacy.dart';
 import 'package:money_management/screens/splash/splash.dart';
 import 'package:money_management/screens/terms/terms.dart';
 import 'package:money_management/widgets/widgets.dart';
 
-Widget userUpdate() {
+Widget userUpdate(context,{required UserModel user}) {
   return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: ListTile(
+        onTap: () {
+          Navigator.push(context, 
+          MaterialPageRoute(builder: (context) =>   EditUser(userdatalist: user,)));
+        },
           leading: prIcon(icon: Icons.manage_accounts, size: 30.0),
           title: prText600(data: 'Update User Details')));
 }
@@ -72,11 +78,8 @@ Widget privacy(context) {
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: ListTile(
           onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ScreenPrivacy(),
-                ));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const ScreenPrivacy()));
           },
           leading: prIcon(size: 30.0, icon: Icons.privacy_tip),
           title: prText600(data: 'Privacy Policy')));

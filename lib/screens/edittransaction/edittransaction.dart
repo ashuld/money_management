@@ -1,45 +1,37 @@
-// ignore_for_file: unrelated_type_equality_checks
-
 import 'package:flutter/material.dart';
 import 'package:money_management/db/constants/color.dart';
 import 'package:money_management/db/constants/itemlist.dart';
 import 'package:money_management/db/functions/db_functions.dart';
 import 'package:money_management/db/model/transactions.dart';
-import 'package:money_management/screens/addtransaction/widgets/addtrbackground.dart';
+import 'package:money_management/screens/edittransaction/widgets/edittrbg.dart';
 import 'package:money_management/widgets/bottomnavigation.dart';
 import 'package:money_management/widgets/widgets.dart';
 
-class ScreenAddTransaction extends StatefulWidget {
-  const ScreenAddTransaction({super.key});
+class EditTransaction extends StatefulWidget {
+  const EditTransaction({super.key, required this.transactionlist});
+  final TransactionModel transactionlist;
 
   @override
-  State<ScreenAddTransaction> createState() => _ScreenAddTransactionState();
+  State<EditTransaction> createState() => _EditTransactionState();
 }
 
-class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
+class _EditTransactionState extends State<EditTransaction> {
   DateTime date = DateTime.now();
   String? selectedItem;
   String? selectedType;
-  final TextEditingController transaction = TextEditingController();
-  final TextEditingController note = TextEditingController();
-  final TextEditingController amount = TextEditingController();
-
-  FocusNode ex = FocusNode();
-  FocusNode amount_ = FocusNode();
-  FocusNode name = FocusNode();
+  TextEditingController transaction = TextEditingController();
+  TextEditingController note = TextEditingController();
+  TextEditingController amount = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    ex.addListener(() {
-      setState(() {});
-    });
-    name.addListener(() {
-      setState(() {});
-    });
-    amount_.addListener(() {
-      setState(() {});
-    });
+    transaction = TextEditingController(text: widget.transactionlist.name);
+    note = TextEditingController(text: widget.transactionlist.note);
+    amount = TextEditingController(text: widget.transactionlist.amount.toString());
+    date = widget.transactionlist.datetime;
+    selectedItem = widget.transactionlist.category;
+    selectedType = widget.transactionlist.type;
   }
 
   @override
@@ -50,7 +42,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              addTransactionBackground(context),
+              editTransactionBackground(context),
               Positioned(
                 top: MediaQuery.of(context).size.height * .15,
                 child: Container(
@@ -166,7 +158,6 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                           child: TextFormField(
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
-                            focusNode: name,
                             controller: transaction,
                             decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.symmetric(
@@ -186,7 +177,6 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
                             keyboardType: TextInputType.number,
-                            focusNode: amount_,
                             controller: amount,
                             decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.symmetric(
@@ -213,9 +203,9 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                                     initialDate: DateTime.now(),
                                     firstDate: DateTime(2016),
                                     lastDate: DateTime(2100));
-                                if (newDate == Null) return;
+                                if (newDate == null) return;
                                 setState(() {
-                                  date = newDate!;
+                                  date = newDate;
                                 });
                               },
                               child: customText(
@@ -230,7 +220,6 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                       Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15),
                           child: TextFormField(
-                            focusNode: ex,
                             controller: note,
                             decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.symmetric(
@@ -255,7 +244,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                                 color: prColor),
                             width: MediaQuery.of(context).size.width * .23,
                             height: MediaQuery.of(context).size.height * .06,
-                            child: secText500(data: 'Save', size: 20.0)),
+                            child: secText500(data: 'Update', size: 20.0)),
                       ),
                     ],
                   ),
@@ -277,16 +266,16 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
         selectedType == null) {
       showSnackBarr(context);
     } else {
-      showToast(message: 'Transaction Added');
-      final trans = TransactionModel(
+      showToast(message: 'Transaction Updated');
+      final editedtransaction = TransactionModel(
           type: selectedType!,
           category: selectedItem!,
           name: nam,
           amount: amo,
           datetime: date,
           note: no,
-          id: DateTime.now().microsecondsSinceEpoch.toString());
-      addtransaction(trans);
+          id: widget.transactionlist.id);
+      editTransaction(editedtransaction);
       refreshTransaction();
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const BottomNavigation()));

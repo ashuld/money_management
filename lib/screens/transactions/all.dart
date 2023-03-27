@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:money_management/db/constants/color.dart';
+import 'package:money_management/db/constants/itemlist.dart';
 import 'package:money_management/db/functions/db_functions.dart';
 import 'package:money_management/db/model/transactions.dart';
 import 'package:money_management/screens/transactions/widgets/allhead.dart';
@@ -50,47 +51,6 @@ class _ScreenTransactionsState extends State<ScreenTransactions> {
                     builder: (BuildContext context,
                         List<TransactionModel> transactionlist, Widget? child) {
                       final reportdata = transactionlist[index];
-                      String mon;
-                      switch (reportdata.datetime.month.toString()) {
-                        case '1':
-                          mon = 'Jan';
-                          break;
-                        case '2':
-                          mon = 'Feb';
-                          break;
-                        case '3':
-                          mon = "Mar";
-                          break;
-                        case '4':
-                          mon = 'Apr';
-                          break;
-                        case '5':
-                          mon = 'May';
-                          break;
-                        case '6':
-                          mon = 'Jun';
-                          break;
-                        case '7':
-                          mon = 'Jul';
-                          break;
-                        case '8':
-                          mon = 'Aug';
-                          break;
-                        case '9':
-                          mon = 'Sep';
-                          break;
-                        case '10':
-                          mon = 'Oct';
-                          break;
-                        case '11':
-                          mon = 'Nov';
-                          break;
-                        case '12':
-                          mon = 'Dec';
-                          break;
-                        default:
-                          return const Text('data');
-                      }
                       return ListTile(
                         onTap: () {
                           bottomSheet(context, reportdata);
@@ -103,10 +63,10 @@ class _ScreenTransactionsState extends State<ScreenTransactions> {
                         subtitle: customText(
                             color: unselected,
                             data:
-                                '$mon-${reportdata.datetime.day}/${reportdata.datetime.year}',
+                                '${mon[reportdata.datetime.month - 1]}-${reportdata.datetime.day}/${reportdata.datetime.year}',
                             thickness: th600),
                         trailing: Text(
-                          reportdata.amount.toString(),
+                          '₹ ${reportdata.amount.toString()}',
                           style: TextStyle(
                               color: reportdata.type == 'Income'
                                   ? incomecol

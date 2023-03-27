@@ -23,7 +23,7 @@ class TransactionModelAdapter extends TypeAdapter<TransactionModel> {
       amount: fields[4] as double,
       datetime: fields[5] as DateTime,
       note: fields[6] as String,
-      id: fields[0] as int?,
+      id: fields[0] as String?,
     );
   }
 

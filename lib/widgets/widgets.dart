@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:money_management/db/constants/color.dart';
 
 Widget customBox({var height, var width}) {
@@ -113,4 +114,20 @@ OutlineInputBorder selectedBorder() {
   return OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
       borderSide: const BorderSide(width: 2, color: prColor));
+}
+
+void showToast({required String message}) {
+  Fluttertoast.showToast(
+      msg: message,
+      backgroundColor: Colors.black,
+      fontSize: 16,
+      textColor: secColor,
+      timeInSecForIosWeb: 2);
+}
+
+void showSnackBarr(BuildContext context) {
+  var snackbar = SnackBar(
+      backgroundColor: Colors.black,
+      content: secText400(data: 'Items Are Required!'));
+  ScaffoldMessenger.of(context).showSnackBar(snackbar);
 }

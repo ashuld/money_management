@@ -2,48 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:money_management/db/constants/color.dart';
 import 'package:money_management/db/functions/db_functions.dart';
 import 'package:money_management/db/model/userdata.dart';
-import 'package:money_management/screens/login/login.dart';
+import 'package:money_management/screens/edituser/widgets/edituserbg.dart';
 import 'package:money_management/widgets/bottomnavigation.dart';
 import 'package:money_management/widgets/widgets.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'widgets/createbackground.dart';
 
-class ScreenCreateAccount extends StatefulWidget {
-  const ScreenCreateAccount({super.key});
+class EditUser extends StatefulWidget {
+  const EditUser({super.key, required this.userdatalist});
+  final UserModel userdatalist;
 
   @override
-  State<ScreenCreateAccount> createState() => _ScreenCreateAccountState();
+  State<EditUser> createState() => _EditUserState();
 }
 
-class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
-  final name = TextEditingController();
-  final phone = TextEditingController();
-  final username = TextEditingController();
-  final password = TextEditingController();
-
-  FocusNode name_ = FocusNode();
-  FocusNode phone_ = FocusNode();
-  FocusNode username_ = FocusNode();
-  FocusNode password_ = FocusNode();
+class _EditUserState extends State<EditUser> {
+  TextEditingController name = TextEditingController();
+  TextEditingController phone = TextEditingController();
+  TextEditingController username = TextEditingController();
+  TextEditingController password = TextEditingController();
 
   var formKey = GlobalKey<FormState>();
   bool obscure = true;
 
   @override
   void initState() {
+    name = TextEditingController(text: widget.userdatalist.name);
+    phone = TextEditingController(text: widget.userdatalist.phn);
+    username = TextEditingController(text: widget.userdatalist.mail);
+    password = TextEditingController(text: widget.userdatalist.password);
     super.initState();
-    name_.addListener(() {
-      setState(() {});
-    });
-    phone_.addListener(() {
-      setState(() {});
-    });
-    username_.addListener(() {
-      setState(() {});
-    });
-    password_.addListener(() {
-      setState(() {});
-    });
   }
 
   @override
@@ -52,7 +38,7 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
         backgroundColor: secColor,
         body: SafeArea(
           child: Stack(alignment: Alignment.center, children: [
-            createBackground(context),
+            editUserBackground(context),
             Positioned(
               top: MediaQuery.of(context).size.height * .15,
               child: Container(
@@ -71,7 +57,6 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
                             textInputAction: TextInputAction.next,
-                            focusNode: name_,
                             controller: name,
                             decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.symmetric(
@@ -98,7 +83,6 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
                                 AutovalidateMode.onUserInteraction,
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.number,
-                            focusNode: phone_,
                             controller: phone,
                             decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.symmetric(
@@ -125,7 +109,6 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
                             textInputAction: TextInputAction.next,
-                            focusNode: username_,
                             controller: username,
                             decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.symmetric(
@@ -158,7 +141,6 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
                                 AutovalidateMode.onUserInteraction,
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.number,
-                            focusNode: password_,
                             controller: password,
                             decoration: InputDecoration(
                                 suffixIcon: obscure == true
@@ -205,17 +187,7 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
                               onbuttonclick();
                             }
                           },
-                          child: secText600(data: 'Register')),
-                      box10(),
-                      TextButton(
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const ScreenLogIn(),
-                                ));
-                          },
-                          child: prText400(data: 'Login!'))
+                          child: secText600(data: 'Update')),
                     ],
                   ),
                 ),
@@ -230,18 +202,15 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
     final phonedb = phone.text.trim();
     final usernamedb = username.text;
     final passworddb = password.text;
-    showToast(message: 'Account Created');
-    reset();
-    final userdetails = UserModel(
-        id: DateTime.now().microsecondsSinceEpoch.toString(),
+    showToast(message: 'User Details Modified');
+    final useredit = UserModel(
+        id: widget.userdatalist.id,
         name: namedb,
         phn: phonedb,
         mail: usernamedb,
         password: passworddb);
-    adduser(userdetails);
-    var prefs = await SharedPreferences.getInstance();
-    prefs.setBool('isLogged', true);
-// ignore: use_build_context_synchronously
+    edituser(useredit);
+    notify();
     await Navigator.pushReplacement(
         context,
         MaterialPageRoute(

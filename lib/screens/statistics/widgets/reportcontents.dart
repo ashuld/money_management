@@ -1,25 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:money_management/db/constants/color.dart';
+import 'package:money_management/db/functions/db_functions.dart';
 import 'package:money_management/widgets/widgets.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 Widget pieChart(context, dataMap) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 5),
-    child: Column(
-      children: [
-        PieChart(
-          dataMap: dataMap,
-          chartRadius: MediaQuery.of(context).size.width,
-          legendOptions: const LegendOptions(
-              legendTextStyle: TextStyle(
-                  color: prColor, fontWeight: FontWeight.bold, fontSize: 16),
-              legendPosition: LegendPosition.right),
-          chartValuesOptions:
-              const ChartValuesOptions(showChartValuesInPercentage: true),
-        )
-      ],
-    ),
+  return ValueListenableBuilder(
+    valueListenable: transactionnotifier,
+    builder: (context, value, child) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5),
+        child: Column(
+          children: [
+            PieChart(
+              dataMap: dataMap,
+              chartRadius: MediaQuery.of(context).size.width * 0.8,
+              colorList: const [
+                food,
+                entertainment,
+                education,
+                transportation,
+                personalcare,
+                loans,
+                medical,
+                otherexpense,
+              ],
+              legendOptions: const LegendOptions(
+                  showLegendsInRow: true,
+                  legendTextStyle: TextStyle(
+                      color: prColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16),
+                  legendPosition: LegendPosition.bottom),
+              chartValuesOptions:
+                  const ChartValuesOptions(showChartValuesInPercentage: true),
+            )
+          ],
+        ),
+      );
+    },
   );
 }
 

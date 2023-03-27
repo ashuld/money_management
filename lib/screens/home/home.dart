@@ -11,6 +11,11 @@ import 'package:money_management/screens/home/widgets/home_seeall.dart';
 import 'package:money_management/screens/home/widgets/homelist.dart';
 import 'package:money_management/widgets/widgets.dart';
 
+var newname;
+var phno;
+var email;
+var password;
+
 class ScreenHome extends StatefulWidget {
   const ScreenHome({super.key});
 
@@ -42,13 +47,14 @@ class _ScreenHomeState extends State<ScreenHome> {
                   name = element.name;
                   phnno = element.phn;
                   mail = element.mail;
+                  newname = UserModel(name: element.name, phn: element.phn, mail: element.mail, password: element.password, id: element.id);
                 }
                 return ListView(
                   children: [
                     header(name, phnno, mail),
                     tile1(context),
                     const Divider(height: 3.0),
-                    tile2(context),
+                    tile2(context, newname),
                     tile3(context)
                   ],
                 );
@@ -115,17 +121,22 @@ class _ScreenHomeState extends State<ScreenHome> {
                                 ],
                                 color: plain,
                                 borderRadius: BorderRadius.circular(15)),
-                            child: Column(
-                              children: [
-                                box20(),
-                                totalText(),
-                                customBox(height: 7.0),
-                                totalBalance(),
-                                box15(),
-                                inexText(),
-                                customBox(height: 6.0),
-                                balance()
-                              ],
+                            child: ValueListenableBuilder(
+                              valueListenable: transactionnotifier,
+                              builder: (context, value, child) {
+                                return Column(
+                                  children: [
+                                    box20(),
+                                    totalText(),
+                                    customBox(height: 7.0),
+                                    totalBalance(),
+                                    box15(),
+                                    inexText(),
+                                    customBox(height: 6.0),
+                                    balance()
+                                  ],
+                                );
+                              },
                             ),
                           ),
                         )

@@ -16,7 +16,7 @@ Widget spaceTerms(context){
                     width: 300,
                     child: ListView(
                        children:const [
-                        Text("""     TERMS AND CONDITIONS OF USE FOR \n                      'BudgetBuddy'
+                        Text("""     TERMS AND CONDITIONS OF USE FOR 'BudgetBuddy'
 
 Welcome to our money management mobile app. If you continue to use this app, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern's relationship with you in relation to this app. If you disagree with any part of these terms and conditions, please do not use our app.
 

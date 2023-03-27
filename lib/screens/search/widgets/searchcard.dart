@@ -1,74 +1,49 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
 import 'package:flutter/material.dart';
 import 'package:money_management/db/constants/color.dart';
+import 'package:money_management/db/constants/itemlist.dart';
 import 'package:money_management/db/model/transactions.dart';
+import 'package:money_management/widgets/bottomsheet.dart';
+import 'package:money_management/widgets/widgets.dart';
 
 class WidgetSearchCard extends StatelessWidget {
   final TransactionModel modelObj;
   final Icon icon;
-  const WidgetSearchCard({
-    super.key,
-    required this.modelObj
-    ,required this.icon});
-
+  const WidgetSearchCard(
+      {super.key, required this.modelObj, required this.icon});
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: prColor
-        ),
+            borderRadius: BorderRadius.circular(15), color: prColor),
         height: 75,
-        child:  Padding(
+        child: Padding(
           padding: const EdgeInsets.only(top: 10),
           child: ListTile(
-            onTap: () {
-              
-            },
-            leading: Padding(
-              padding: const EdgeInsets.only(
-                left: 15
+              onTap: () {
+                bottomSheet(context, modelObj);
+              },
+              leading: ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: Image.asset(
+                  'assets/icons/${modelObj.category}.png',
+                  height: 40,
+                ),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    overflow: TextOverflow.ellipsis,
-                    modelObj.category,
-                    style: const TextStyle(
-                      color: secColor,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
-                   const SizedBox(
-                     height: 3,
-                   ),
-                  Text(modelObj.note,
-                  style: const TextStyle(
-                    color: secColor,
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold
-                  ),
-                  )
-                ],
-              ),
-            ),
-            trailing: Padding(
-              padding: const EdgeInsets.only(left: 50),
-              child: Text('${modelObj.amount}',
-              overflow: TextOverflow.ellipsis,
-              style:  TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: modelObj.type == 'Income'? incomecol:expensecol
-              ),
-              ),
-              ),
-          ),
-          ),
+              title: secText600(data: modelObj.name, size: 17.0),
+              subtitle: customText(
+                  data:
+                      '${mon[modelObj.datetime.month - 1]}-${modelObj.datetime.day}/${modelObj.datetime.year}',
+                  thickness: th600,
+                  color: unselected),
+              trailing: customText(
+                  data: '₹ ${modelObj.amount.toString()}',
+                  size: 20.0,
+                  thickness: th600,
+                  color: modelObj.type == 'Income' ? incomecol : expensecol)),
+        ),
       ),
     );
   }

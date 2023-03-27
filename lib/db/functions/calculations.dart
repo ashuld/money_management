@@ -6,6 +6,7 @@ double total = 0;
 final box = Hive.box<TransactionModel>(transactiondb);
 
 double totaler() {
+  refreshTransaction();
   var totals = box.values.toList();
   List a = [0.0];
   for (var i = 0; i < totals.length; i++) {
@@ -17,6 +18,7 @@ double totaler() {
 }
 
 double incometotaler() {
+  refreshTransaction();
   var totals = box.values.toList();
   List a = [0.0];
   for (var i = 0; i < totals.length; i++) {
@@ -27,6 +29,7 @@ double incometotaler() {
 }
 
 double expensetotaler() {
+  refreshTransaction();
   var totals = box.values.toList();
   List a = [0.0];
   for (var i = 0; i < totals.length; i++) {
