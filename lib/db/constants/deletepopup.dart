@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:money_management/db/constants/color.dart';
 import 'package:money_management/db/functions/db_functions.dart';
+import 'package:money_management/widgets/bottomnavigation.dart';
 import 'package:money_management/widgets/widgets.dart';
 
 Future<void> alertMessage(BuildContext context, {required String id}) async {
@@ -24,7 +25,9 @@ Future<void> alertMessage(BuildContext context, {required String id}) async {
                 await refreshTransaction();
                 refreshTransaction();
                 showToast(message: 'Deleted');
-                Navigator.pop(context);
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => const BottomNavigation(),));
               },
               child: const Text('Yes', style: TextStyle(color: prColor)))
         ],

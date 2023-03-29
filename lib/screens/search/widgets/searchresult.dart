@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:money_management/db/constants/color.dart';
+import 'package:money_management/db/constants/deletepopup.dart';
 import 'package:money_management/db/model/transactions.dart';
+import 'package:money_management/screens/edittransaction/edittransaction.dart';
 import 'package:money_management/screens/search/search.dart';
 import 'package:money_management/screens/search/widgets/searchcard.dart';
+
+
 
 class WidgetSearchResult extends StatelessWidget {
   final String query;
@@ -17,8 +21,7 @@ class WidgetSearchResult extends StatelessWidget {
       color: secColor,
       child: ValueListenableBuilder(
         valueListenable: filterListener,
-        builder:
-            (BuildContext context, List<TransactionModel> newvalue, child) {
+        builder: (context, newvalue, child) {
           return filterListener.value.isEmpty
               ? const Center(
                   child: Text(
@@ -48,7 +51,10 @@ class WidgetSearchResult extends StatelessWidget {
                               motion: const StretchMotion(),
                               children: [
                                 SlidableAction(
-                                  onPressed: (context) {},
+                                  onPressed: (context) {
+                                    alertMessage(context,
+                                        id: value.id.toString());
+                                  },
                                   backgroundColor: secColor,
                                   borderRadius: BorderRadius.circular(10),
                                   foregroundColor: expensecol,
@@ -56,7 +62,23 @@ class WidgetSearchResult extends StatelessWidget {
                                   label: 'Delete',
                                 ),
                                 SlidableAction(
-                                    onPressed: (context) {},
+                                    onPressed: (context) {
+                                      final TransactionModel transmodel =
+                                          TransactionModel(
+                                              type: value.type,
+                                              category: value.category,
+                                              name: value.name,
+                                              amount: value.amount,
+                                              datetime: value.datetime,
+                                              note: value.note,
+                                              id: value.id);
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (context) => EditTransaction(
+                                          transactionlist: transmodel,
+                                        ),
+                                      ));
+                                    },
                                     backgroundColor: secColor,
                                     borderRadius: BorderRadius.circular(10),
                                     foregroundColor: prColor,

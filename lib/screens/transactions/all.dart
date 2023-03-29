@@ -50,6 +50,10 @@ class _ScreenTransactionsState extends State<ScreenTransactions> {
                     valueListenable: transactionnotifier,
                     builder: (BuildContext context,
                         List<TransactionModel> transactionlist, Widget? child) {
+                      if (transactionlist.isEmpty ||
+                          index >= transactionlist.length) {
+                        return Container();
+                      }
                       final reportdata = transactionlist[index];
                       return ListTile(
                         onTap: () {

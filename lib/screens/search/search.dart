@@ -37,7 +37,7 @@ class ScreenSearch extends SearchDelegate {
           PopupMenuItem(
               onTap: () async {
                 await refreshTransaction();
-                filterListener.value = transactionnotifier.value;
+                filterListener.value = transactionfilternotifier.value;
               },
               child: const Text(
                 'All',
@@ -46,7 +46,7 @@ class ScreenSearch extends SearchDelegate {
           PopupMenuItem(
               onTap: () async {
                 await refreshTransaction();
-                filterListener.value = transactionnotifier.value
+                filterListener.value = transactionfilternotifier.value
                     .where((element) =>
                         element.datetime.day == DateTime.now().day &&
                         element.datetime.month == DateTime.now().month &&
@@ -60,7 +60,7 @@ class ScreenSearch extends SearchDelegate {
           PopupMenuItem(
               onTap: () async {
                 await refreshTransaction();
-                filterListener.value = transactionnotifier.value
+                filterListener.value = transactionfilternotifier.value
                     .where((element) =>
                         element.datetime.day == DateTime.now().day - 1 &&
                         element.datetime.month == DateTime.now().month &&
@@ -76,7 +76,7 @@ class ScreenSearch extends SearchDelegate {
                 await refreshTransaction();
                 final today = DateTime.now();
                 final lastweek = today.subtract(const Duration(days: 7));
-                filterListener.value = transactionnotifier.value
+                filterListener.value = transactionfilternotifier.value
                     .where((element) => element.datetime.isAfter(lastweek))
                     .toList();
               },
@@ -90,12 +90,12 @@ class ScreenSearch extends SearchDelegate {
                   return;
                 } else {
                   await refreshTransaction();
-                  filterListener.value = transactionnotifier.value
+                  filterListener.value = transactionfilternotifier.value
                       .where((element) =>
                           element.datetime.isAfter(
                               first!.subtract(const Duration(days: 1))) &&
-                          element.datetime.isBefore(
-                                second!.add(const Duration(days: 1))))
+                          element.datetime
+                              .isBefore(second!.add(const Duration(days: 1))))
                       .toList();
                 }
               },
@@ -113,29 +113,33 @@ class ScreenSearch extends SearchDelegate {
           PopupMenuItem(
               onTap: () async {
                 await refreshTransaction();
-                filterListener.value = transactionnotifier.value;
+                filterListener.value = transactionfilternotifier.value;
               },
-              child: const Text('All',
-              style: TextStyle(color: prColor),
+              child: const Text(
+                'All',
+                style: TextStyle(color: prColor),
               )),
           PopupMenuItem(
               onTap: () async {
                 await refreshTransaction();
-                filterListener.value = transactionnotifier.value
+                filterListener.value = transactionfilternotifier.value
                     .where((element) => element.type == 'Income')
                     .toList();
               },
-              child: const Text('Income',
-              style: TextStyle(color: prColor),)),
+              child: const Text(
+                'Income',
+                style: TextStyle(color: prColor),
+              )),
           PopupMenuItem(
               onTap: () async {
                 await refreshTransaction();
-                filterListener.value = transactionnotifier.value
+                filterListener.value = transactionfilternotifier.value
                     .where((element) => element.type == 'Expense')
                     .toList();
               },
-              child: const Text('Expense',
-              style: TextStyle(color: prColor),
+              child: const Text(
+                'Expense',
+                style: TextStyle(color: prColor),
               ))
         ],
       )

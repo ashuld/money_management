@@ -32,7 +32,7 @@ List<String> mon = [
 ];
 
 
-Map<String, double> dataMap = {
+var dataMap =  <String, double>{
     "Food": foodtotal(),
     "Entertainment": entertainmenttotal(),
     "Education": educationtotal(),

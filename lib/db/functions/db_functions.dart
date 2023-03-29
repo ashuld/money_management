@@ -26,7 +26,9 @@ Future<void> refreshTransaction() async {
   final translist = await getalltransaction();
   translist.sort((first, second) => second.datetime.compareTo(first.datetime));
   transactionnotifier.value.clear();
+  transactionfilternotifier.value.clear();
   transactionnotifier.value.addAll(translist);
+  transactionfilternotifier.value.addAll(translist);
   transactionnotifier.notifyListeners();
 }
 

@@ -9,7 +9,7 @@ double foodtotal() {
   refreshTransaction();
   var totals = box.values.toList();
   List a = [0.0];
-  for (var i = 0; i < totals.length; i++) {
+ for (var i = 0; i < totals.length; i++) {
     a.add(totals[i].category == 'Food' ? totals[i].amount : 0);
   }
   total = a.reduce((value, element) => value + element);
