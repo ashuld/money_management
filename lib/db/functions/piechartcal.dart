@@ -5,7 +5,7 @@ import 'package:money_management/db/model/transactions.dart';
 double total = 0;
 final box = Hive.box<TransactionModel>(transactiondb);
 
-double foodtotal() {
+double foodtotal()  {
   refreshTransaction();
   var totals = box.values.toList();
   List a = [0.0];
@@ -93,13 +93,3 @@ double otherexpensestotal() {
   return total;
 }
 
-refresher(){
-  otherexpensestotal();
-  foodtotal();
-  entertainmenttotal();
-  medicaltotal();
-  educationtotal();
-  transportationtotal();
-  personalcaretotal();
-  loanstotal();
-}

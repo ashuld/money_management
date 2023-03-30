@@ -1,4 +1,3 @@
-
 import 'package:money_management/db/functions/piechartcal.dart';
 
 List<String> categoryitem = [
@@ -31,14 +30,13 @@ List<String> mon = [
   'Dec'
 ];
 
-
-var dataMap =  <String, double>{
-    "Food": foodtotal(),
-    "Entertainment": entertainmenttotal(),
-    "Education": educationtotal(),
-    "Transportation":transportationtotal(),
-    "Personal Care":personalcaretotal(),
-    "Loans":loanstotal(),
-    "Medical":medicaltotal(),
-    "Other Expenses":otherexpensestotal(),
-  };
+Map<String, double> dataMap = <String, double>{
+  "Food": foodtotal(),
+  "Entertainment": entertainmenttotal(),
+  "Education": educationtotal(),
+  "Transportation": transportationtotal(),
+  "Personal Care": personalcaretotal(),
+  "Loans": loanstotal(),
+  "Medical": medicaltotal(),
+  "Other Expenses": otherexpensestotal(),
+};

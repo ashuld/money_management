@@ -52,11 +52,11 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
             children: [
               addTransactionBackground(context),
               Positioned(
-                top: MediaQuery.of(context).size.height * .15,
+                top: MediaQuery.of(context).size.height * .1,
                 child: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20), color: plain),
-                  height: MediaQuery.of(context).size.height * .68,
+                  height: MediaQuery.of(context).size.height * .78,
                   width: MediaQuery.of(context).size.width * 0.9,
                   child: Column(
                     children: [
