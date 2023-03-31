@@ -24,7 +24,7 @@ Widget spaceAbout(context) {
                   color: prColor, fontWeight: FontWeight.bold, fontSize: 20),
             ),
             box10(),
-            prText500(data: 'Version 0.0.1'),
+            prText500(data: 'Version 1.0.0'),
             box10(),
             const Text(
               'Developed By Ashish',
