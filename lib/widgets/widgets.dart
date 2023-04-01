@@ -125,9 +125,9 @@ void showToast({required String message}) {
       timeInSecForIosWeb: 2);
 }
 
-void showSnackBarr(BuildContext context) {
+void showSnackBarr(BuildContext context, content) {
   var snackbar = SnackBar(
       backgroundColor: Colors.black,
-      content: secText400(data: 'Items Are Required!'));
+      content: secText400(data: content));
   ScaffoldMessenger.of(context).showSnackBar(snackbar);
 }

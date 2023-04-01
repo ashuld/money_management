@@ -267,22 +267,27 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
   }
 
   Future<void> onbuttonclick() async {
-    final nam = transaction.text;
-    final amo = double.parse(amount.text);
+    final nam = transaction.text.trim();
+    final amo = amount.text;
     final no = note.text;
-    if (nam.isEmpty ||
-        amo.toString().isEmpty ||
+    if (amo.toString().isEmpty ||
+        amo.toString().contains('-') ||
+        amo.toString().contains('.') ||
+        amo.toString().contains(',')) {
+      showSnackBarr(context, "Invalid Amount");
+    } else if (nam.isEmpty ||
         no.isEmpty ||
         selectedItem == null ||
         selectedType == null) {
-      showSnackBarr(context);
+      showSnackBarr(context, "Items are Required");
     } else {
       showToast(message: 'Transaction Added');
+      final amount1 = double.parse(amo);
       final trans = TransactionModel(
           type: selectedType!,
           category: selectedItem!,
           name: nam,
-          amount: amo,
+          amount: amount1,
           datetime: date,
           note: no,
           id: DateTime.now().microsecondsSinceEpoch.toString());

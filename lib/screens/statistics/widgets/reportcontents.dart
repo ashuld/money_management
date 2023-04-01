@@ -34,7 +34,7 @@ Widget pieChart(context, dataMap) {
               child: Column(
                 children: [
                   PieChart(
-                    chartType: ChartType.ring,
+                    chartType: ChartType.disc,
                     dataMap: dataMap,
                     chartLegendSpacing: 40,
                     ringStrokeWidth: 40,
@@ -55,7 +55,7 @@ Widget pieChart(context, dataMap) {
                         showChartValuesOutside: false,
                         chartValueBackgroundColor: secColor,
                         chartValueStyle: TextStyle(
-                            color: prColor,
+                            color: secColor,
                             fontSize: 15,
                             fontWeight: FontWeight.bold)),
                   )

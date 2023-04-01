@@ -202,19 +202,30 @@ class _EditUserState extends State<EditUser> {
     final phonedb = phone.text.trim();
     final usernamedb = username.text;
     final passworddb = password.text;
-    showToast(message: 'User Details Modified');
-    final useredit = UserModel(
-        id: widget.userdatalist.id,
-        name: namedb,
-        phn: phonedb,
-        mail: usernamedb,
-        password: passworddb);
-    edituser(useredit);
-    notify();
-    await Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const BottomNavigation(),
-        ));
+    if (phonedb.contains('-') ||
+        phonedb.contains('.') ||
+        phonedb.contains(',') ||
+        phonedb.contains(' ') ||
+        passworddb.contains('_') ||
+        passworddb.contains('.') ||
+        passworddb.contains(',') ||
+        passworddb.contains(' ')) {
+      showSnackBarr(context, 'Data contains Invalid Characters');
+    } else {
+      showToast(message: 'User Details Modified');
+      final useredit = UserModel(
+          id: widget.userdatalist.id,
+          name: namedb,
+          phn: phonedb,
+          mail: usernamedb,
+          password: passworddb);
+      edituser(useredit);
+      notify();
+      await Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const BottomNavigation(),
+          ));
+    }
   }
 }

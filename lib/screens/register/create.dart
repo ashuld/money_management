@@ -141,11 +141,15 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
                               if (value!.isEmpty) {
                                 return 'Email Required';
                               }
-                              if (value.contains('@gmail.com')) {
-                                return null;
-                              } else {
+                              final parts = value.split('@');
+                              if (parts.length != 2 ||
+                                  parts[1] != 'gmail.com') {
                                 return 'Invalid email';
                               }
+                              if (parts[0].isEmpty) {
+                                return 'Invalid email';
+                              }
+                              return null;
                             },
                           )),
                       box20(),
@@ -230,22 +234,35 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
     final phonedb = phone.text.trim();
     final usernamedb = username.text;
     final passworddb = password.text;
-    showToast(message: 'Account Created');
-    reset();
-    final userdetails = UserModel(
-        id: DateTime.now().microsecondsSinceEpoch.toString(),
-        name: namedb,
-        phn: phonedb,
-        mail: usernamedb,
-        password: passworddb);
-    adduser(userdetails);
-    var prefs = await SharedPreferences.getInstance();
-    prefs.setBool('isLogged', true);
+    if (namedb.isEmpty) {
+      showSnackBarr(context, 'Invalid Name');
+    } else if (phonedb.contains('-') ||
+        phonedb.contains('.') ||
+        phonedb.contains(',') ||
+        phonedb.contains(' ') ||
+        passworddb.contains('_') ||
+        passworddb.contains('.') ||
+        passworddb.contains(',') ||
+        passworddb.contains(' ')) {
+      showSnackBarr(context, 'Data contains Invalid Characters');
+    } else {
+      showToast(message: 'Account Created');
+      reset();
+      final userdetails = UserModel(
+          id: DateTime.now().microsecondsSinceEpoch.toString(),
+          name: namedb,
+          phn: phonedb,
+          mail: usernamedb,
+          password: passworddb);
+      adduser(userdetails);
+      var prefs = await SharedPreferences.getInstance();
+      prefs.setBool('isLogged', true);
 // ignore: use_build_context_synchronously
-    await Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const BottomNavigation(),
-        ));
+      await Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const BottomNavigation(),
+          ));
+    }
   }
 }

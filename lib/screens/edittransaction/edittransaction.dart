@@ -256,15 +256,21 @@ class _EditTransactionState extends State<EditTransaction> {
   }
 
   Future<void> onbuttonclick() async {
-    final nam = transaction.text;
+    final nam = transaction.text.trim();
     final amo = double.parse(amount.text);
     final no = note.text;
-    if (nam.isEmpty ||
-        amo.toString().isEmpty ||
+    if (amo.toString().isEmpty ||
+        amo.toString().contains('-') ||
+        amo.toString().contains('.') ||
+        amo.toString().contains(',') ||
+        amo.toString().contains(' ')) {
+      showSnackBarr(context, "Invalid Amount");
+    }
+   else if (nam.isEmpty ||
         no.isEmpty ||
         selectedItem == null ||
         selectedType == null) {
-      showSnackBarr(context);
+      showSnackBarr(context,"Items are required");
     } else {
       showToast(message: 'Transaction Updated');
       final editedtransaction = TransactionModel(

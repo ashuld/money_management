@@ -61,14 +61,14 @@ class _ScreenLogInState extends State<ScreenLogIn> {
                       controller: usernameController,
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
-                        labelText: "Username",
+                        labelText: "Email",
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'Username/Email required';
+                          return 'Email required';
                         }
                         return null;
                       },
