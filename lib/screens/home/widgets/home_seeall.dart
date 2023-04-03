@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:money_management/db/constants/color.dart';
 import 'package:money_management/screens/transactions/all.dart';
 import 'package:money_management/widgets/widgets.dart';
 
@@ -20,7 +19,7 @@ Widget homeSeeall(BuildContext context) {
                     builder: (context) => const ScreenTransactions(),
                   ));
             },
-            child: customText(data: 'See All', color: unselected, size: 13.0))
+            child: customText(data: 'See All', color: Colors.blue.shade500, size: 15.0, thickness: FontWeight.bold))
       ],
     ),
   );

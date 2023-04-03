@@ -270,10 +270,11 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
     final nam = transaction.text.trim();
     final amo = amount.text;
     final no = note.text;
-    if (amo.toString().isEmpty ||
-        amo.toString().contains('-') ||
-        amo.toString().contains('.') ||
-        amo.toString().contains(',')) {
+    if (double.parse(amo)<= 0||
+      amo.isEmpty ||
+        amo.contains('-') ||
+        amo.contains('.') ||
+        amo.contains(',')) {
       showSnackBarr(context, "Invalid Amount");
     } else if (nam.isEmpty ||
         no.isEmpty ||

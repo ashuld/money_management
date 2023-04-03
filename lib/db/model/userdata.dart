@@ -11,12 +11,12 @@ class UserModel extends HiveObject {
   String phn;
   @HiveField(3)
   String mail;
-  @HiveField(4)
-  String password;
+  // @HiveField(4)
+  // String password;
   UserModel(
       {required this.name,
       required this.phn,
       required this.mail,
-      required this.password,
+      // required this.password,
       required this.id});
 }

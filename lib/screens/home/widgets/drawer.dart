@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:money_management/db/constants/color.dart';
-import 'package:money_management/screens/login/login.dart';
+// import 'package:money_management/screens/login/login.dart';
 import 'package:money_management/screens/settings/settings.dart';
 import 'package:money_management/widgets/widgets.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 Widget header(name, phnno, mail) {
   return DrawerHeader(
@@ -32,21 +32,21 @@ Widget header(name, phnno, mail) {
   );
 }
 
-Widget tile1(context) {
-  return ListTile(
-      leading: prIcon(icon: Icons.logout_outlined),
-      title: prText400(data: 'Log Out', size: 18.0),
-      onTap: () async {
-        var prefs = await SharedPreferences.getInstance();
-        prefs.setBool('isLogged', false);
-        Navigator.pop(context);
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const ScreenLogIn(),
-            ));
-      });
-}
+// Widget tile1(context) {
+//   return ListTile(
+//       leading: prIcon(icon: Icons.logout_outlined),
+//       title: prText400(data: 'Log Out', size: 18.0),
+//       onTap: () async {
+//         var prefs = await SharedPreferences.getInstance();
+//         prefs.setBool('isLogged', false);
+//         Navigator.pop(context);
+//         Navigator.push(
+//             context,
+//             MaterialPageRoute(
+//               builder: (context) => const ScreenLogIn(),
+//             ));
+//       });
+// }
 
 Widget tile2(context, userlist) {
   return ListTile(

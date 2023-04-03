@@ -53,13 +53,15 @@ class _ScreenHomeState extends State<ScreenHome> {
                     name = element.name;
                     phnno = element.phn;
                     mail = element.mail;
-                    newname = UserModel(name: element.name, phn: element.phn, mail: element.mail, password: element.password, id: element.id);
+                    newname = UserModel(name: element.name, phn: element.phn, mail: element.mail,id: element.id 
+                    // password: element.password 
+                    );
                   }
                   return ListView(
                     children: [
                       header(name, phnno, mail),
-                      tile1(context),
-                      const Divider(height: 3.0),
+                      // tile1(context),
+                      // const Divider(height: 3.0),
                       tile2(context, newname),
                       tile3(context)
                     ],

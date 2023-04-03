@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:money_management/db/constants/color.dart';
 import 'package:money_management/db/functions/db_functions.dart';
 import 'package:money_management/db/model/userdata.dart';
-import 'package:money_management/screens/login/login.dart';
+// import 'package:money_management/screens/login/login.dart';
 import 'package:money_management/widgets/bottomnavigation.dart';
 import 'package:money_management/widgets/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,15 +19,15 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
   final name = TextEditingController();
   final phone = TextEditingController();
   final username = TextEditingController();
-  final password = TextEditingController();
+  // final password = TextEditingController();
 
   FocusNode name_ = FocusNode();
   FocusNode phone_ = FocusNode();
   FocusNode username_ = FocusNode();
-  FocusNode password_ = FocusNode();
+  // FocusNode password_ = FocusNode();
 
   var formKey = GlobalKey<FormState>();
-  bool obscure = true;
+  // bool obscure = true;
 
   @override
   void initState() {
@@ -41,9 +41,9 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
     username_.addListener(() {
       setState(() {});
     });
-    password_.addListener(() {
-      setState(() {});
-    });
+    // password_.addListener(() {
+    //   setState(() {});
+    // });
   }
 
   @override
@@ -90,7 +90,7 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
                               return null;
                             },
                           )),
-                      box20(),
+                      box30(),
                       Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15),
                           child: TextFormField(
@@ -118,7 +118,7 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
                               return null;
                             },
                           )),
-                      box20(),
+                      box30(),
                       Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15),
                           child: TextFormField(
@@ -152,53 +152,53 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
                               return null;
                             },
                           )),
-                      box20(),
-                      Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: TextFormField(
-                            maxLength: 6,
-                            obscureText: obscure,
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            textInputAction: TextInputAction.next,
-                            keyboardType: TextInputType.number,
-                            focusNode: password_,
-                            controller: password,
-                            decoration: InputDecoration(
-                                suffixIcon: obscure == true
-                                    ? IconButton(
-                                        icon: const Icon(Icons.lock_outline),
-                                        onPressed: () {
-                                          setState(() {
-                                            obscure = false;
-                                          });
-                                        },
-                                      )
-                                    : IconButton(
-                                        icon: const Icon(Icons.lock_open_sharp),
-                                        onPressed: () {
-                                          setState(() {
-                                            obscure = true;
-                                          });
-                                        },
-                                      ),
-                                contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 15, vertical: 15),
-                                labelText: 'Password',
-                                labelStyle: const TextStyle(
-                                  fontSize: 17,
-                                  color: unselected,
-                                ),
-                                enabledBorder: unselectedBorder(),
-                                focusedBorder: selectedBorder()),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Password Required';
-                              }
-                              return null;
-                            },
-                          )),
-                      box10(),
+                      box30(),
+                      // Padding(
+                      //     padding: const EdgeInsets.symmetric(horizontal: 15),
+                      //     child: TextFormField(
+                      //       maxLength: 6,
+                      //       obscureText: obscure,
+                      //       autovalidateMode:
+                      //           AutovalidateMode.onUserInteraction,
+                      //       textInputAction: TextInputAction.next,
+                      //       keyboardType: TextInputType.number,
+                      //       focusNode: password_,
+                      //       controller: password,
+                      //       decoration: InputDecoration(
+                      //           suffixIcon: obscure == true
+                      //               ? IconButton(
+                      //                   icon: const Icon(Icons.lock_outline),
+                      //                   onPressed: () {
+                      //                     setState(() {
+                      //                       obscure = false;
+                      //                     });
+                      //                   },
+                      //                 )
+                      //               : IconButton(
+                      //                   icon: const Icon(Icons.lock_open_sharp),
+                      //                   onPressed: () {
+                      //                     setState(() {
+                      //                       obscure = true;
+                      //                     });
+                      //                   },
+                      //                 ),
+                      //           contentPadding: const EdgeInsets.symmetric(
+                      //               horizontal: 15, vertical: 15),
+                      //           labelText: 'Password',
+                      //           labelStyle: const TextStyle(
+                      //             fontSize: 17,
+                      //             color: unselected,
+                      //           ),
+                      //           enabledBorder: unselectedBorder(),
+                      //           focusedBorder: selectedBorder()),
+                      //       validator: (value) {
+                      //         if (value!.isEmpty) {
+                      //           return 'Password Required';
+                      //         }
+                      //         return null;
+                      //       },
+                      //     )),
+                      box30(),
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
@@ -209,17 +209,17 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
                               onbuttonclick();
                             }
                           },
-                          child: secText600(data: 'Register')),
-                      box10(),
-                      TextButton(
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const ScreenLogIn(),
-                                ));
-                          },
-                          child: prText400(data: 'Login!'))
+                          child: secText600(data: 'Get Started')),
+                      // box10(),
+                      // TextButton(
+                      //     onPressed: () {
+                      //       Navigator.pushReplacement(
+                      //           context,
+                      //           MaterialPageRoute(
+                      //             builder: (context) => const ScreenLogIn(),
+                      //           ));
+                      //     },
+                      //     child: prText400(data: 'Login!'))
                     ],
                   ),
                 ),
@@ -233,18 +233,19 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
     final namedb = name.text.trim();
     final phonedb = phone.text.trim();
     final usernamedb = username.text;
-    final passworddb = password.text;
+    // final passworddb = password.text;
     if (namedb.isEmpty) {
       showSnackBarr(context, 'Invalid Name');
     } else if (phonedb.contains('-') ||
         phonedb.contains('.') ||
         phonedb.contains(',') ||
-        phonedb.contains(' ') ||
-        passworddb.contains('_') ||
-        passworddb.contains('.') ||
-        passworddb.contains(',') ||
-        passworddb.contains(' ')) {
-      showSnackBarr(context, 'Data contains Invalid Characters');
+        phonedb.contains(' ') 
+        // ||passworddb.contains('_') ||
+        // passworddb.contains('.') ||
+        // passworddb.contains(',') ||
+        // passworddb.contains(' ')
+        ) {
+      showSnackBarr(context, 'Phone No. contains Invalid Characters');
     } else {
       showToast(message: 'Account Created');
       reset();
@@ -253,7 +254,8 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
           name: namedb,
           phn: phonedb,
           mail: usernamedb,
-          password: passworddb);
+          // password: passworddb
+          );
       adduser(userdetails);
       var prefs = await SharedPreferences.getInstance();
       prefs.setBool('isLogged', true);

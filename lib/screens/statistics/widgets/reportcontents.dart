@@ -38,7 +38,7 @@ Widget pieChart(context, dataMap) {
                     dataMap: dataMap,
                     chartLegendSpacing: 40,
                     ringStrokeWidth: 40,
-                    chartRadius: MediaQuery.of(context).size.width * 0.6,
+                    chartRadius: MediaQuery.of(context).size.width * 0.75,
                     colorList: chartcolor,
                     centerText: 'Expense',
                     legendOptions: const LegendOptions(
@@ -55,7 +55,7 @@ Widget pieChart(context, dataMap) {
                         showChartValuesOutside: false,
                         chartValueBackgroundColor: secColor,
                         chartValueStyle: TextStyle(
-                            color: secColor,
+                            color: Colors.black,
                             fontSize: 15,
                             fontWeight: FontWeight.bold)),
                   )

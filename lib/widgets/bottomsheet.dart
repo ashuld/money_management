@@ -29,6 +29,7 @@ PersistentBottomSheetController bottomSheet(context, data) {
                     children: [
                       GestureDetector(
                           onTap: () {
+                            Navigator.of(context).pop();
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

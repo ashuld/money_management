@@ -28,7 +28,8 @@ class _EditTransactionState extends State<EditTransaction> {
     super.initState();
     transaction = TextEditingController(text: widget.transactionlist.name);
     note = TextEditingController(text: widget.transactionlist.note);
-    amount = TextEditingController(text: widget.transactionlist.amount.toString());
+    amount =
+        TextEditingController(text: widget.transactionlist.amount.toString());
     date = widget.transactionlist.datetime;
     selectedItem = widget.transactionlist.category;
     selectedType = widget.transactionlist.type;
@@ -257,27 +258,27 @@ class _EditTransactionState extends State<EditTransaction> {
 
   Future<void> onbuttonclick() async {
     final nam = transaction.text.trim();
-    final amo = double.parse(amount.text);
+    final amo = amount.text;
     final no = note.text;
-    if (amo.toString().isEmpty ||
-        amo.toString().contains('-') ||
-        amo.toString().contains('.') ||
-        amo.toString().contains(',') ||
-        amo.toString().contains(' ')) {
+    if (double.parse(amo) <= 0||
+      amo.isEmpty ||
+        amo.contains('-') ||
+        amo.contains(',') ||
+        amo.contains(' ')) {
       showSnackBarr(context, "Invalid Amount");
-    }
-   else if (nam.isEmpty ||
+    } else if (nam.isEmpty ||
         no.isEmpty ||
         selectedItem == null ||
         selectedType == null) {
-      showSnackBarr(context,"Items are required");
+      showSnackBarr(context, "Items are required");
     } else {
       showToast(message: 'Transaction Updated');
+      final amount1 = double.parse(amo);
       final editedtransaction = TransactionModel(
           type: selectedType!,
           category: selectedItem!,
           name: nam,
-          amount: amo,
+          amount: amount1,
           datetime: date,
           note: no,
           id: widget.transactionlist.id);
