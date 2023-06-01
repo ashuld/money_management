@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:money_management/db/constants/color.dart';
-import 'package:money_management/db/constants/deletepopup.dart';
+import 'package:money_management/constants/color.dart';
+import 'package:money_management/constants/deletepopup.dart';
 import 'package:money_management/db/model/transactions.dart';
 import 'package:money_management/screens/edittransaction/edittransaction.dart';
 import 'package:money_management/screens/search/search.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:money_management/db/constants/color.dart';
+import 'package:money_management/constants/color.dart';
 import 'package:money_management/db/functions/db_functions.dart';
 import 'package:money_management/db/functions/piechartcal.dart';
 import 'package:money_management/db/model/transactions.dart';
@@ -19,10 +19,10 @@ Widget pieChart(context, dataMap) {
           loanstotal() +
           medicaltotal();
       return total == 0
-          ? Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
+          ? const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 5),
               child: Column(
-                children: const [
+                children: [
                   SizedBox(
                       child: Text('No Data',
                           style: TextStyle(fontSize: 20, color: prColor))),

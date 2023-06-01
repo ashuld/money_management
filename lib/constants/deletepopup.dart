@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:money_management/db/constants/color.dart';
+import 'package:money_management/constants/color.dart';
 import 'package:money_management/db/functions/db_functions.dart';
 import 'package:money_management/widgets/bottomnavigation.dart';
 import 'package:money_management/widgets/widgets.dart';

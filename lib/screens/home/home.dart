@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:money_management/db/constants/color.dart';
+import 'package:money_management/constants/color.dart';
 import 'package:money_management/db/functions/db_functions.dart';
 import 'package:money_management/db/model/transactions.dart';
 import 'package:money_management/db/model/userdata.dart';

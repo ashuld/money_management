@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:money_management/db/constants/color.dart';
+import 'package:money_management/constants/color.dart';
 import 'package:money_management/db/functions/db_functions.dart';
 import 'package:money_management/db/model/userdata.dart';
-// import 'package:money_management/screens/login/login.dart';
 import 'package:money_management/widgets/bottomnavigation.dart';
 import 'package:money_management/widgets/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,32 +18,6 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
   final name = TextEditingController();
   final phone = TextEditingController();
   final username = TextEditingController();
-  // final password = TextEditingController();
-
-  FocusNode name_ = FocusNode();
-  FocusNode phone_ = FocusNode();
-  FocusNode username_ = FocusNode();
-  // FocusNode password_ = FocusNode();
-
-  var formKey = GlobalKey<FormState>();
-  // bool obscure = true;
-
-  @override
-  void initState() {
-    super.initState();
-    name_.addListener(() {
-      setState(() {});
-    });
-    phone_.addListener(() {
-      setState(() {});
-    });
-    username_.addListener(() {
-      setState(() {});
-    });
-    // password_.addListener(() {
-    //   setState(() {});
-    // });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,168 +33,101 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
                     borderRadius: BorderRadius.circular(20), color: plain),
                 height: MediaQuery.of(context).size.height * .78,
                 width: MediaQuery.of(context).size.width * 0.9,
-                child: Form(
-                  key: formKey,
-                  child: Column(
-                    children: [
-                      customBox(height: 50.0),
-                      Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: TextFormField(
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            textInputAction: TextInputAction.next,
-                            focusNode: name_,
-                            controller: name,
-                            decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 15, vertical: 15),
-                                labelText: 'Name',
-                                labelStyle: const TextStyle(
-                                  fontSize: 17,
-                                  color: unselected,
-                                ),
-                                enabledBorder: unselectedBorder(),
-                                focusedBorder: selectedBorder()),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Name Required';
-                              }
-                              return null;
-                            },
-                          )),
-                      box30(),
-                      Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: TextFormField(
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            textInputAction: TextInputAction.next,
-                            keyboardType: TextInputType.number,
-                            focusNode: phone_,
-                            controller: phone,
-                            decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 15, vertical: 15),
-                                labelText: 'Phone No.',
-                                labelStyle: const TextStyle(
-                                    fontSize: 17, color: unselected),
-                                enabledBorder: unselectedBorder(),
-                                focusedBorder: selectedBorder()),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Phone No. Required';
-                              }
-                              if (value.length > 10 || value.length < 10) {
-                                return 'Invalid Phone Number';
-                              }
-                              return null;
-                            },
-                          )),
-                      box30(),
-                      Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: TextFormField(
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            textInputAction: TextInputAction.next,
-                            focusNode: username_,
-                            controller: username,
-                            decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 15, vertical: 15),
-                                labelText: 'Email',
-                                labelStyle: const TextStyle(
-                                  fontSize: 17,
-                                  color: unselected,
-                                ),
-                                enabledBorder: unselectedBorder(),
-                                focusedBorder: selectedBorder()),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Email Required';
-                              }
-                              final parts = value.split('@');
-                              if (parts.length != 2 ||
-                                  parts[1] != 'gmail.com') {
-                                return 'Invalid email';
-                              }
-                              if (parts[0].isEmpty) {
-                                return 'Invalid email';
-                              }
-                              return null;
-                            },
-                          )),
-                      box30(),
-                      // Padding(
-                      //     padding: const EdgeInsets.symmetric(horizontal: 15),
-                      //     child: TextFormField(
-                      //       maxLength: 6,
-                      //       obscureText: obscure,
-                      //       autovalidateMode:
-                      //           AutovalidateMode.onUserInteraction,
-                      //       textInputAction: TextInputAction.next,
-                      //       keyboardType: TextInputType.number,
-                      //       focusNode: password_,
-                      //       controller: password,
-                      //       decoration: InputDecoration(
-                      //           suffixIcon: obscure == true
-                      //               ? IconButton(
-                      //                   icon: const Icon(Icons.lock_outline),
-                      //                   onPressed: () {
-                      //                     setState(() {
-                      //                       obscure = false;
-                      //                     });
-                      //                   },
-                      //                 )
-                      //               : IconButton(
-                      //                   icon: const Icon(Icons.lock_open_sharp),
-                      //                   onPressed: () {
-                      //                     setState(() {
-                      //                       obscure = true;
-                      //                     });
-                      //                   },
-                      //                 ),
-                      //           contentPadding: const EdgeInsets.symmetric(
-                      //               horizontal: 15, vertical: 15),
-                      //           labelText: 'Password',
-                      //           labelStyle: const TextStyle(
-                      //             fontSize: 17,
-                      //             color: unselected,
-                      //           ),
-                      //           enabledBorder: unselectedBorder(),
-                      //           focusedBorder: selectedBorder()),
-                      //       validator: (value) {
-                      //         if (value!.isEmpty) {
-                      //           return 'Password Required';
-                      //         }
-                      //         return null;
-                      //       },
-                      //     )),
-                      box30(),
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              backgroundColor: prColor),
-                          onPressed: () async {
-                            if (formKey.currentState!.validate()) {
-                              onbuttonclick();
+                child: Column(
+                  children: [
+                    customBox(height: 50.0),
+                    Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          textInputAction: TextInputAction.next,
+                          controller: name,
+                          decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 15),
+                              labelText: 'Name',
+                              labelStyle: const TextStyle(
+                                fontSize: 17,
+                                color: unselected,
+                              ),
+                              enabledBorder: unselectedBorder(),
+                              focusedBorder: selectedBorder()),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Name Required';
                             }
+                            return null;
                           },
-                          child: secText600(data: 'Get Started')),
-                      // box10(),
-                      // TextButton(
-                      //     onPressed: () {
-                      //       Navigator.pushReplacement(
-                      //           context,
-                      //           MaterialPageRoute(
-                      //             builder: (context) => const ScreenLogIn(),
-                      //           ));
-                      //     },
-                      //     child: prText400(data: 'Login!'))
-                    ],
-                  ),
+                        )),
+                    box30(),
+                    Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.number,
+                          maxLength: 10,
+                          controller: phone,
+                          decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 15),
+                              labelText: 'Phone No.',
+                              labelStyle: const TextStyle(
+                                  fontSize: 17, color: unselected),
+                              enabledBorder: unselectedBorder(),
+                              focusedBorder: selectedBorder()),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Phone No. Required';
+                            }
+                            if (value.length > 10 || value.length < 10) {
+                              return 'Invalid Phone Number';
+                            }
+                            return null;
+                          },
+                        )),
+                    box30(),
+                    Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          textInputAction: TextInputAction.next,
+                          controller: username,
+                          decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 15),
+                              labelText: 'Email',
+                              labelStyle: const TextStyle(
+                                fontSize: 17,
+                                color: unselected,
+                              ),
+                              enabledBorder: unselectedBorder(),
+                              focusedBorder: selectedBorder()),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Email Required';
+                            }
+                            final parts = value.split('@');
+                            if (parts.length != 2 || parts[1] != 'gmail.com') {
+                              return 'Invalid email';
+                            }
+                            if (parts[0].isEmpty) {
+                              return 'Invalid email';
+                            }
+                            return null;
+                          },
+                        )),
+                    box30(),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            backgroundColor: prColor),
+                        onPressed: () async {
+                          onbuttonclick();
+                        },
+                        child: secText600(data: 'Get Started')),
+                  ],
                 ),
               ),
             )
@@ -237,9 +143,9 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
     if (namedb.isEmpty) {
       showSnackBarr(context, 'Invalid Name');
     } else if (phonedb.contains('-') ||
-        phonedb.contains('.') ||
-        phonedb.contains(',') ||
-        phonedb.contains(' ') 
+            phonedb.contains('.') ||
+            phonedb.contains(',') ||
+            phonedb.contains(' ')
         // ||passworddb.contains('_') ||
         // passworddb.contains('.') ||
         // passworddb.contains(',') ||
@@ -250,12 +156,12 @@ class _ScreenCreateAccountState extends State<ScreenCreateAccount> {
       showToast(message: 'Account Created');
       reset();
       final userdetails = UserModel(
-          id: DateTime.now().microsecondsSinceEpoch.toString(),
-          name: namedb,
-          phn: phonedb,
-          mail: usernamedb,
-          // password: passworddb
-          );
+        id: DateTime.now().microsecondsSinceEpoch.toString(),
+        name: namedb,
+        phn: phonedb,
+        mail: usernamedb,
+        // password: passworddb
+      );
       adduser(userdetails);
       var prefs = await SharedPreferences.getInstance();
       prefs.setBool('isLogged', true);

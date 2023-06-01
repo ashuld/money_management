@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:money_management/db/constants/color.dart';
-import 'package:money_management/db/constants/parsedate.dart';
+import 'package:money_management/constants/color.dart';
+import 'package:money_management/constants/parsedate.dart';
 
 DateTime? first;
 DateTime? second;

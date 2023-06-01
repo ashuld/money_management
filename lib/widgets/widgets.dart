@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:money_management/db/constants/color.dart';
+import 'package:money_management/constants/color.dart';
 
 Widget customBox({var height, var width}) {
   return SizedBox(
